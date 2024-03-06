@@ -96,7 +96,6 @@ static void	mlx_map_resolution(t_map *map, int fd)
 		if ((!next && map->height <= 2) || map->unwanted)
 			mlx_message_error(3);
 		mlx_check_map(map, line, next);
-		free(line);
 		one = 1;
 	}
 	if (mlx_check_map(map, NULL, NULL))
