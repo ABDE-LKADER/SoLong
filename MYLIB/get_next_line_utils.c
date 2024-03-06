@@ -17,6 +17,8 @@ size_t	strlen_set(char *s, char set)
 	size_t	i;
 
 	i = 0;
+	if (!s)
+		return (i);
 	while (s[i] && s[i] != set)
 		i++;
 	return (i);

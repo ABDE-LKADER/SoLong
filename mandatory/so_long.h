@@ -17,23 +17,36 @@
 # include <fcntl.h>
 # include <mlx.h>
 
-typedef struct s_res
+typedef struct s_map
 {
-    int     with;
+	int		len;
+    int     exit;
+    int     width;
     int     height;
-}		t_res;
+    int     player;
+    int     collect;
+    int     unwanted;
+    char    **map;
+    t_list  *list;
+}		t_map;
+
+typedef struct s_img
+{
+	void	*wall;
+    int     width;
+    int     height;
+}		t_img;
 
 typedef struct s_data
 {
 	void	*mlx;
-	void	*wall;
 	void	*mlx_win;
 }           t_data;
 
 # define TILTEL "so_long"
 # define WALL "textures/brick.xpm"
 
-void	message_error(int set);
-void	parce_in(int ac, char **av);
+void	mlx_message_error(int set);
+void	mlx_parce_input(int ac, char **av, t_map *res);
 
 #endif

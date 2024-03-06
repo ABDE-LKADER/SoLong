@@ -12,7 +12,7 @@
 
 NAME		=	so_long
 SRCS		=	mandatory/so_long.c \
-				mandatory/check_errors.c
+				mandatory/parce_in.c
 
 OBJS		=	$(SRCS:.c=.o)
 
