@@ -52,25 +52,23 @@ static int mlx_check_map(t_map *map, char *line, char *next)
 	(map->player != 1) && (invalid = 1);
 }
 
-static void	free_split(char **str)
+static void	mlx_map_init(t_map *map, int fd)
 {
-	size_t	i;
+	int		index;
+	char	*line;
 
-	i = 0;
-	while (str[i])
-		free(str[i++]);
-	free(str);
-}
-
-static void	mlx_map_init(t_map *map)
-{
+	index = 0;
+	line = get_next_line(fd);
 	map->map = malloc(map->height * sizeof(char **));
-	while (map->list->next)
+	while (line)
 	{
-		*map->map = malloc(map->width * sizeof(char *));
-		ft_strlcpy(*map->map, map->list->content, map->width + 1);
-		map->list = map->list->next;
+		map->map[index] = malloc(map->width + 1 * sizeof(char *));
+		ft_strlcpy(map->map[index], line, map->width + 1);
+		free(line);
+		line = get_next_line(fd);
+		index++;
 	}
+	map->map[index] = NULL;
 }
 
 static void	mlx_map_resolution(t_map *map, int fd)
@@ -83,19 +81,17 @@ static void	mlx_map_resolution(t_map *map, int fd)
 	if (!line)
 		mlx_message_error(3);
 	map->len = ft_strlen(line);
-	map->list = ft_lstnew(line);
 	(ft_strchr(line, '\n')) && (map->len--);
 	(1) && (one = 0, map->exit = 0, map->player = 0, map->collect = 0,
 		map->unwanted = 0, map->height = 0, map->width = map->len);
 	while (line)
 	{
 		(one) && (line = next);
-		if (one)
-			ft_lstadd_back(&map->list, ft_lstnew(line));
 		next = get_next_line(fd);
 		if ((!next && map->height <= 2) || map->unwanted)
 			mlx_message_error(3);
 		mlx_check_map(map, line, next);
+		free(line);
 		one = 1;
 	}
 	if (mlx_check_map(map, NULL, NULL))
@@ -116,7 +112,10 @@ void	mlx_parce_input(int ac, char **av, t_map *map)
 	if (fd == -1)
 		mlx_message_error(2);
 	mlx_map_resolution(map, fd);
-	mlx_map_init(map);
-	ft_lstclear(map->list, free);
+	close(fd);
+	fd = open(av[1], O_RDONLY);
+	if (fd == -1)
+		mlx_message_error(2);
+	mlx_map_init(map, fd);
 	close(fd);
 }
