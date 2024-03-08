@@ -31,11 +31,10 @@ static int mlx_check_map(t_map *map, char *line, char *next)
 	int	invalid;
 
 	invalid = 0;
+	map->height++;
 	(next) && (map->len = ft_strlen(next));
 	(ft_strchr(next, '\n')) && (map->len--);
-	map->height++;
-	if (line)
-		(map->width != map->len || line[0] != '1' || line[map->width - 1] != '1')
+	(line && (map->width != map->len || line[0] != '1' || line[map->width - 1] != '1'))
 		&& (map->unwanted = 1);
 	while (line && *line && *line != '\n')
 	{
@@ -89,15 +88,16 @@ static void	mlx_map_resolution(t_map *map, int fd)
 		(one) && (line = next);
 		next = get_next_line(fd);
 		if ((!next && map->height <= 2) || map->unwanted)
+		{
+			free(line);
 			mlx_message_error(3);
-		mlx_check_map(map, line, next);
-		free(line);
-		one = 1;
+		}
+		(1) && (mlx_check_map(map, line, next), free(line), one = 1);
 	}
 	if (mlx_check_map(map, NULL, NULL))
 			mlx_message_error(3);
 }
-
+qsx
 void	mlx_parce_input(int ac, char **av, t_map *map)
 {
 	int		fd;
