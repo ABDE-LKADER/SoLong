@@ -97,7 +97,7 @@ static void	mlx_map_resolution(t_map *map, int fd)
 	if (mlx_check_map(map, NULL, NULL))
 			mlx_message_error(3);
 }
-qsx
+
 void	mlx_parce_input(int ac, char **av, t_map *map)
 {
 	int		fd;
