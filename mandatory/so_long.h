@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/02/26 13:46:01 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/03/10 08:52:36 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,6 @@
 # include "mylib.h"
 # include <fcntl.h>
 # include <mlx.h>
-
-typedef struct s_data
-{
-	void	*mlx;
-	void	*mlx_win;
-}           t_data;
 
 typedef struct s_map
 {
@@ -45,6 +39,14 @@ typedef struct s_img
 	int		width;
 	int		height;
 }		t_img;
+
+typedef struct s_data
+{
+	void	*mlx;
+	void	*mlx_win;
+	t_map	*map;
+	t_img	*img;
+}           t_data;
 
 # define TILTEL "so_long"
 # define WALL "textures/brick.xpm"

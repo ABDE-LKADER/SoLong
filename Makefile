@@ -6,7 +6,7 @@
 #    By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/19 17:23:22 by abadouab          #+#    #+#              #
-#    Updated: 2024/02/22 10:44:26 by abadouab         ###   ########.fr        #
+#    Updated: 2024/03/08 16:33:46 by abadouab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ HEADER		=	mandatory/so_long.h
 MYLB		=	MYLIB
 MYAR		=	MYLIB/libar.a
 
-FLAGS		=	cc -Wall -Wextra
+FLAGS		=	cc -Wall -Wextra -Werror
 RM			=	rm -fr
 
 GREEN		=	"\033[1;32m"
@@ -36,10 +36,11 @@ $(MYLB):
 	@make -C $(MYLB) --no-print-directory
 
 $(NAME): $(OBJS)
-	$(FLAGS) $^ -L$(MYLB) -lar -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+	$(FLAGS) $^ -L$(MYLB) -lar -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+# $(FLAGS) $^ -L$(MYLB) -lar -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 $(OBJS): %.o: %.c $(HEADER) $(MYAR)
-	$(FLAGS) -c -I $(MYLB) -I/usr/include -Imlx_linux -O3 $< -o $@
+	$(FLAGS) -c -I $(MYLB) $< -o $@
 
 clean:
 	@$(RM) $(OBJS)

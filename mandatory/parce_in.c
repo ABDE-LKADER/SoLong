@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_errors.c                                     :+:      :+:    :+:   */
+/*   parce_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/02/26 13:46:01 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/03/10 08:51:34 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	mlx_message_error(int set)
 	else if (set == 2)
 		write(2, "\033[1;31mError: \033[0m<file> not found\n", 35);
 	else if (set == 3)
-		write(2, "\033[1;31mError: \033[0m<Map> Invalid\n", 32);
+		write(2, "\033[1;31mError: \033[0mInvalid <Map>\n", 32);
 	exit(EXIT_FAILURE);
 }
 
@@ -41,14 +41,15 @@ static int mlx_check_map(t_map *map, char *line, char *next)
 		(*line == 'E') && (map->exit++);
 		(*line == 'P') && (map->player++);
 		(*line == 'C') && (map->collect++);
-		(*line != '1' && map->height == 1) && (map->unwanted = 1);
 		(*line != '1' && !next) && (map->unwanted = 1);
 		(!ft_strchr("01EPC", *line)) && (map->unwanted = 1);
+		(*line != '1' && map->height == 1) && (map->unwanted = 1);
 		line++;
 	}
 	(!map->collect) && (invalid = 1);
 	(map->exit != 1) && (invalid = 1);
 	(map->player != 1) && (invalid = 1);
+	return (invalid);
 }
 
 static void	mlx_map_init(t_map *map, int fd)
@@ -70,16 +71,16 @@ static void	mlx_map_init(t_map *map, int fd)
 	map->map[index] = NULL;
 }
 
-static void	mlx_map_resolution(t_map *map, int fd)
+static void	mlx_map_resolution(t_map *data, int fd)
 {
 	int		one;
 	char	*line;
 	char	*next;
-	
+
 	line = get_next_line(fd);
 	if (!line)
 		mlx_message_error(3);
-	map->len = ft_strlen(line);
+	data->map->len = ft_strlen(line);
 	(ft_strchr(line, '\n')) && (map->len--);
 	(1) && (one = 0, map->exit = 0, map->player = 0, map->collect = 0,
 		map->unwanted = 0, map->height = 0, map->width = map->len);
@@ -87,7 +88,7 @@ static void	mlx_map_resolution(t_map *map, int fd)
 	{
 		(one) && (line = next);
 		next = get_next_line(fd);
-		if ((!next && map->height <= 2) || map->unwanted)
+		if ((!line && map->height <= 2) || map->unwanted)
 		{
 			free(line);
 			mlx_message_error(3);
@@ -98,7 +99,7 @@ static void	mlx_map_resolution(t_map *map, int fd)
 			mlx_message_error(3);
 }
 
-void	mlx_parce_input(int ac, char **av, t_map *map)
+void	mlx_parce_input(int ac, char **av, t_map *data)
 {
 	int		fd;
 	char	*extn;
@@ -111,11 +112,11 @@ void	mlx_parce_input(int ac, char **av, t_map *map)
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		mlx_message_error(2);
-	mlx_map_resolution(map, fd);
+	mlx_map_resolution(data, fd);
 	close(fd);
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		mlx_message_error(2);
-	mlx_map_init(map, fd);
+	mlx_map_init(data, fd);
 	close(fd);
 }
