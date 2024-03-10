@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/03/10 08:51:34 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/03/10 21:34:48 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static int mlx_check_map(t_map *map, char *line, char *next)
 	int	invalid;
 
 	invalid = 0;
-	map->height++;
+	if (line)
+		map->height++;
 	(next) && (map->len = ft_strlen(next));
 	(ft_strchr(next, '\n')) && (map->len--);
 	(line && (map->width != map->len || line[0] != '1' || line[map->width - 1] != '1'))
@@ -71,7 +72,7 @@ static void	mlx_map_init(t_map *map, int fd)
 	map->map[index] = NULL;
 }
 
-static void	mlx_map_resolution(t_map *data, int fd)
+static void	mlx_map_resolution(t_map *map, int fd)
 {
 	int		one;
 	char	*line;
@@ -80,7 +81,7 @@ static void	mlx_map_resolution(t_map *data, int fd)
 	line = get_next_line(fd);
 	if (!line)
 		mlx_message_error(3);
-	data->map->len = ft_strlen(line);
+	map->len = ft_strlen(line);
 	(ft_strchr(line, '\n')) && (map->len--);
 	(1) && (one = 0, map->exit = 0, map->player = 0, map->collect = 0,
 		map->unwanted = 0, map->height = 0, map->width = map->len);
@@ -99,7 +100,7 @@ static void	mlx_map_resolution(t_map *data, int fd)
 			mlx_message_error(3);
 }
 
-void	mlx_parce_input(int ac, char **av, t_map *data)
+void	mlx_parce_input(int ac, char **av, t_map *map)
 {
 	int		fd;
 	char	*extn;
@@ -112,11 +113,11 @@ void	mlx_parce_input(int ac, char **av, t_map *data)
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		mlx_message_error(2);
-	mlx_map_resolution(data, fd);
+	mlx_map_resolution(map, fd);
 	close(fd);
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		mlx_message_error(2);
-	mlx_map_init(data, fd);
+	mlx_map_init(map, fd);
 	close(fd);
 }

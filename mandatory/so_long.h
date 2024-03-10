@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/03/10 08:52:36 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/03/10 21:27:45 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_map
 	int		player;
 	int		collect;
 	int		unwanted;
-	char    **map;
+	char	**map;
 }		t_map;
 
 typedef struct s_img
@@ -44,16 +44,16 @@ typedef struct s_data
 {
 	void	*mlx;
 	void	*mlx_win;
-	t_map	*map;
-	t_img	*img;
+	t_map	map;
+	t_img	img;
 }           t_data;
 
 # define TILTEL "so_long"
-# define WALL "textures/brick.xpm"
-# define GROUND "textures/brick.xpm"
-# define PLAYER "textures/brick.xpm"
-# define EXIT "textures/brick.xpm"
-# define COLLECT "textures/brick.xpm"
+# define WALL "textures/wall.xpm"
+# define GROUND "textures/ground.xpm"
+# define PLAYER "textures/p_down.xpm"
+# define EXIT "textures/close_portal.xpm"
+# define COLLECT "textures/collect.xpm"
 
 void	mlx_message_error(int set);
 void	mlx_parce_input(int ac, char **av, t_map *map);
