@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/03/10 21:27:45 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/03/12 15:58:51 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ typedef struct s_map
 	int		player;
 	int		collect;
 	int		unwanted;
+	char	up;
+	char	down;
+	char	left;
+	char	right;
 	char	**map;
 }		t_map;
 
@@ -34,7 +38,8 @@ typedef struct s_img
 	void	*wall;
 	void	*exit;
 	void	*ground;
-	void	*player;
+	void	*p_left;
+	void	*p_right;
 	void	*collect;
 	int		width;
 	int		height;
@@ -46,16 +51,34 @@ typedef struct s_data
 	void	*mlx_win;
 	t_map	map;
 	t_img	img;
-}           t_data;
+	int		pos_x;
+	int		pos_y;
+}			t_data;
+
+# define TRUE 1
+# define FALSE 0
+# define DIMO 100
+
+# define GRN "\033[1;32m"
+# define YLW "\033[1;33m"
+# define RED "\033[1;31m"
+# define RST "\033[0m"
 
 # define TILTEL "so_long"
 # define WALL "textures/wall.xpm"
 # define GROUND "textures/ground.xpm"
-# define PLAYER "textures/p_down.xpm"
-# define EXIT "textures/close_portal.xpm"
+# define P_LEFT "textures/p_left.xpm"
+# define P_RIGHT "textures/p_right.xpm"
 # define COLLECT "textures/collect.xpm"
+# define EXIT "textures/close_portal.xpm"
 
+int		map_status(t_data *data);
 void	mlx_message_error(int set);
+void	exit_game(t_data	*data);
+int		destroy_notify(t_data *data);
+void	cleanup(char **s, t_data *data);
+int		mlx_move_player(int key, t_data	*data);
 void	mlx_parce_input(int ac, char **av, t_map *map);
+void	mlx_put_img(t_data *data, int x, int y, int set);
 
 #endif

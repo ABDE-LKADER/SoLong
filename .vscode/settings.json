@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "mylib.h": "c",
+        "unistd.h": "c",
+        "fcntl.h": "c",
+        "so_long.h": "c"
+    }
+}

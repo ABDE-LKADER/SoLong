@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/03/10 21:34:48 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/03/11 16:11:55 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 void	mlx_message_error(int set)
 {
 	if (set == 0)
-		write(2, "\033[1;31mUsage: \033[0m./so_long <filename.ber>\n", 43);
+		write(2, RED"Error:\n"YLW"Usage: "RST"./so_long <filename.ber>\n", 43);
 	else if (set == 1)
-		write(2, "\033[1;31mError: \033[0mInput must have \
+		write(2, "\033[1;31mError:\n\033[0mInput must have \
 		\".ber\" extension.\n", 52);
 	else if (set == 2)
-		write(2, "\033[1;31mError: \033[0m<file> not found\n", 35);
+		write(2, "\033[1;31mError:\n\033[0m<file> not found\n", 35);
 	else if (set == 3)
-		write(2, "\033[1;31mError: \033[0mInvalid <Map>\n", 32);
+		write(2, "\033[1;31mError:\n\033[0mInvalid <Map>\n", 32);
 	exit(EXIT_FAILURE);
 }
 
-static int mlx_check_map(t_map *map, char *line, char *next)
+static int	mlx_check_map(t_map *map, char *line, char *next)
 {
 	int	invalid;
 
@@ -35,8 +35,8 @@ static int mlx_check_map(t_map *map, char *line, char *next)
 		map->height++;
 	(next) && (map->len = ft_strlen(next));
 	(ft_strchr(next, '\n')) && (map->len--);
-	(line && (map->width != map->len || line[0] != '1' || line[map->width - 1] != '1'))
-		&& (map->unwanted = 1);
+	(line && (map->width != map->len || line[0] != '1'
+			|| line[map->width - 1] != '1')) && (map->unwanted = 1);
 	while (line && *line && *line != '\n')
 	{
 		(*line == 'E') && (map->exit++);
@@ -97,7 +97,7 @@ static void	mlx_map_resolution(t_map *map, int fd)
 		(1) && (mlx_check_map(map, line, next), free(line), one = 1);
 	}
 	if (mlx_check_map(map, NULL, NULL))
-			mlx_message_error(3);
+		mlx_message_error(3);
 }
 
 void	mlx_parce_input(int ac, char **av, t_map *map)
