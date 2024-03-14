@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/03/12 15:58:51 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/03/14 11:27:03 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_img
 {
 	void	*wall;
 	void	*exit;
+	void	*wall2;
 	void	*ground;
 	void	*p_left;
 	void	*p_right;
@@ -57,7 +58,7 @@ typedef struct s_data
 
 # define TRUE 1
 # define FALSE 0
-# define DIMO 100
+# define DIMO 32
 
 # define GRN "\033[1;32m"
 # define YLW "\033[1;33m"
@@ -66,6 +67,7 @@ typedef struct s_data
 
 # define TILTEL "so_long"
 # define WALL "textures/wall.xpm"
+# define WALL2 "textures/wall2.xpm"
 # define GROUND "textures/ground.xpm"
 # define P_LEFT "textures/p_left.xpm"
 # define P_RIGHT "textures/p_right.xpm"

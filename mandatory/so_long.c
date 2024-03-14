@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/03/12 15:58:59 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/03/14 11:32:05 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static	int	mlx_init_img(t_data	*data)
 	img = &data->img;
 	img->wall = mlx_xpm_file_to_image(data->mlx, WALL,
 			&img->width, &img->height);
+	img->wall2 = mlx_xpm_file_to_image(data->mlx, WALL2,
+			&img->width, &img->height);
 	img->exit = mlx_xpm_file_to_image(data->mlx, EXIT,
 			&img->width, &img->height);
 	img->p_left = mlx_xpm_file_to_image(data->mlx, P_LEFT,
@@ -29,20 +31,26 @@ static	int	mlx_init_img(t_data	*data)
 			&img->width, &img->height);
 	img->collect = mlx_xpm_file_to_image(data->mlx, COLLECT,
 			&img->width, &img->height);
-	if (!img->wall || !img->ground || !img->p_left || !img->p_right
-		|| !img->exit || !img->collect)
+	if (!img->wall || !img->ground || !img->wall2 || !img->p_left
+		|| !img->p_right || !img->exit || !img->collect)
 		return (1);
 	return (0);
 }
 
 void	mlx_put_img(t_data *data, int x, int y, int set)
 {
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.ground,
+		(x * DIMO), (y * DIMO));
 	if (set && data->map.map[y][x] == '1')
 		mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.wall,
 			(x * DIMO), (y * DIMO));
-	else if (set && ft_strchr("0PEC", data->map.map[y][x]))
-		mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.ground,
-			(x * DIMO), (y * DIMO));
+	// if (set && data->map.map[y][x] == '1' && (data->map.height - 1 == y || !y))
+	// 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.wall,
+	// 		(x * DIMO), (y * DIMO));
+	// else if (set && data->map.map[y][x] == '1' && (data->map.width - 1 == x || !x))
+	// 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.wall2,
+	// 		(x * DIMO), (y * DIMO));
+	// if (set && ft_strchr("0PEC", data->map.map[y][x]))
 	if (data->map.map[y][x] == 'E')
 		mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.exit,
 			(x * DIMO) + 20, (y * DIMO) + 24);
@@ -50,7 +58,7 @@ void	mlx_put_img(t_data *data, int x, int y, int set)
 	{
 		(1) && (data->pos_x = x, data->pos_y = y);
 		mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.p_right,
-			(x * DIMO) + 20, (y * DIMO) + 24);
+			(x * DIMO), (y * DIMO) - 10);
 	}
 	else if (data->map.map[y][x] == 'C')
 		mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.collect,
