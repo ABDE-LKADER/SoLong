@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/03/14 11:27:03 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/03/15 07:21:33 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_data
 
 # define TRUE 1
 # define FALSE 0
-# define DIMO 32
+# define DIMO 48
 
 # define GRN "\033[1;32m"
 # define YLW "\033[1;33m"
