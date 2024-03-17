@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/03/15 07:04:46 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/03/17 08:56:24 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,14 @@ static	int	mlx_init_img(t_data	*data)
 			&img->width, &img->height);
 	img->exit = mlx_xpm_file_to_image(data->mlx, EXIT,
 			&img->width, &img->height);
-	img->p_left = mlx_xpm_file_to_image(data->mlx, P_LEFT,
-			&img->width, &img->height);
-	img->p_right = mlx_xpm_file_to_image(data->mlx, P_RIGHT,
+	img->player = mlx_xpm_file_to_image(data->mlx, PLAYER,
 			&img->width, &img->height);
 	img->ground = mlx_xpm_file_to_image(data->mlx, GROUND,
 			&img->width, &img->height);
 	img->collect = mlx_xpm_file_to_image(data->mlx, COLLECT,
 			&img->width, &img->height);
-	if (!img->wall || !img->ground || !img->wall2 || !img->p_left
-		|| !img->p_right || !img->exit || !img->collect)
+	if (!img->wall || !img->ground || !img->wall2 || !img->player
+		|| !img->exit || !img->collect)
 		return (1);
 	return (0);
 }
@@ -44,25 +42,18 @@ void	mlx_put_img(t_data *data, int x, int y, int set)
 	if (set && data->map.map[y][x] == '1')
 		mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.wall,
 			(x * DIMO), (y * DIMO));
-	// if (set && data->map.map[y][x] == '1' && (data->map.height - 1 == y || !y))
-	// 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.wall,
-	// 		(x * DIMO), (y * DIMO));
-	// else if (set && data->map.map[y][x] == '1' && (data->map.width - 1 == x || !x))
-	// 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.wall2,
-	// 		(x * DIMO), (y * DIMO));
-	// if (set && ft_strchr("0PEC", data->map.map[y][x]))
 	if (data->map.map[y][x] == 'E')
 		mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.exit,
-			(x * DIMO) + 20, (y * DIMO) + 24);
+			x * DIMO, y * DIMO);
 	else if (data->map.map[y][x] == 'P')
 	{
 		(1) && (data->pos_x = x, data->pos_y = y);
-		mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.p_right,
-			(x * DIMO), (y * DIMO) - 10);
+		mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.player,
+			x * DIMO, y * DIMO);
 	}
 	else if (data->map.map[y][x] == 'C')
 		mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.collect,
-			(x * DIMO) + 35, (y * DIMO) + 38);
+			x * DIMO, y * DIMO);
 }
 
 static void	mlx_game_render(t_data *data)

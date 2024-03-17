@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/03/15 07:21:33 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/03/17 08:56:38 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ typedef struct s_img
 	void	*exit;
 	void	*wall2;
 	void	*ground;
-	void	*p_left;
-	void	*p_right;
+	void	*player;
 	void	*collect;
 	int		width;
 	int		height;
@@ -69,8 +68,7 @@ typedef struct s_data
 # define WALL "textures/wall.xpm"
 # define WALL2 "textures/wall2.xpm"
 # define GROUND "textures/ground.xpm"
-# define P_LEFT "textures/p_left.xpm"
-# define P_RIGHT "textures/p_right.xpm"
+# define PLAYER "textures/player.xpm"
 # define COLLECT "textures/collect.xpm"
 # define EXIT "textures/close_portal.xpm"
 
