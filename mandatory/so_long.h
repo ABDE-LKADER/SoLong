@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/03/17 08:56:38 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/03/17 13:18:15 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef struct s_data
 # define GROUND "textures/ground.xpm"
 # define PLAYER "textures/player.xpm"
 # define COLLECT "textures/collect.xpm"
-# define EXIT "textures/close_portal.xpm"
+# define EXIT "textures/exit.xpm"
 
 int		map_status(t_data *data);
 void	mlx_message_error(int set);
