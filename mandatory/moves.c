@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:13:26 by abadouab          #+#    #+#             */
-/*   Updated: 2024/03/17 13:17:47 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/03/18 12:04:41 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	mlx_move_player(int key, t_data	*data)
 		move_right(data);
 	else if (key == 123 && !ft_strchr("1E", data->map.left))
 		move_left(data);
-	else if (!map_status(data))
+	else if (!map_status(data, key))
 		exit_game(data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/19 17:23:22 by abadouab          #+#    #+#              #
-#    Updated: 2024/03/17 13:17:26 by abadouab         ###   ########.fr        #
+#    Updated: 2024/03/18 10:43:43 by abadouab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,11 +39,13 @@ $(MYLB):
 	@make -C $(MYLB) --no-print-directory
 
 $(NAME): $(OBJS)
-	$(FLAGS) $^ -L$(MYLB) -lar -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	@$(FLAGS) $^ -L$(MYLB) -lar -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	@printf "\n"
 # $(FLAGS) $^ -L$(MYLB) -lar -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 $(OBJS): %.o: %.c $(HEADER) $(MYAR)
-	$(FLAGS) -c -I $(MYLB) $< -o $@
+	@$(FLAGS) -c -I $(MYLB) $< -o $@
+	@printf $(GREEN)"."$(RESET)
 
 clean:
 	@$(RM) $(OBJS)
