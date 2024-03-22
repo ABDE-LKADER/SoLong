@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/03/18 10:00:24 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/03/22 09:46:42 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 void	mlx_message_error(int set)
 {
 	if (set == 0)
-		write(2, RED"Error:\n"YLW"Usage: "RST"./so_long <filename.ber>\n", 43);
+		write(2, RED"Error:\n"YLW"Usage: "RST"./so_long <filename.ber>\n", 57);
 	else if (set == 1)
-		write(2, "\033[1;31mError:\n\033[0mInput must have \
-		\".ber\" extension.\n", 52);
+		write(2, RED"Error:\n"RST"Input must have "YLW"\".ber\""RST" extension.\n", 63);
 	else if (set == 2)
-		write(2, "\033[1;31mError:\n\033[0m<file> not found\n", 35);
+		write(2, RED"Error:\n"YLW"<file>"RST" not found.\n", 50);
 	else if (set == 3)
-		write(2, "\033[1;31mError:\n\033[0mInvalid <Map>\n", 32);
+		write(2, RED"Error:\n"RST"Invalid "YLW"<Map>"RST".\n", 44);
 	exit(EXIT_FAILURE);
 }
 

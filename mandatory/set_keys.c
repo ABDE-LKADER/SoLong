@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 10:46:19 by abadouab          #+#    #+#             */
-/*   Updated: 2024/03/18 12:04:42 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/03/20 10:54:12 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	exit_game(t_data	*data)
 	exit(0);
 }
 
-int	map_status(t_data *data, int key)
+int	check_collect(t_data *data)
 {
 	int		x;
 	int		y;
@@ -51,6 +51,13 @@ int	map_status(t_data *data, int key)
 				return (1);
 		}
 	}
+	return (0);
+}
+
+int	map_status(t_data *data, int key)
+{
+	if (check_collect(data))
+		return (1);
 	if ((ft_strchr("E", data->map.up) && key == 126)
 		|| (ft_strchr("E", data->map.down) && key == 125)
 		|| (ft_strchr("E", data->map.left) && key == 123)

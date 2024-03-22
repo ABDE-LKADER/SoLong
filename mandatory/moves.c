@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:13:26 by abadouab          #+#    #+#             */
-/*   Updated: 2024/03/18 12:04:41 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/03/22 10:11:06 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,33 @@
 static void	move_up(t_data *data)
 {
 	data->map.map[data->pos_y][data->pos_x] = '0';
-	mlx_put_img(data, data->pos_x, data->pos_y, TRUE);
+	mlx_put_img(data, data->pos_x, data->pos_y, FALSE);
 	data->map.map[--data->pos_y][data->pos_x] = 'P';
-	mlx_put_img(data, data->pos_x, data->pos_y, TRUE);
+	mlx_put_img(data, data->pos_x, data->pos_y, FALSE);
 }
 
 static void	move_down(t_data *data)
 {
 	data->map.map[data->pos_y][data->pos_x] = '0';
-	mlx_put_img(data, data->pos_x, data->pos_y, TRUE);
+	mlx_put_img(data, data->pos_x, data->pos_y, FALSE);
 	data->map.map[++data->pos_y][data->pos_x] = 'P';
-	mlx_put_img(data, data->pos_x, data->pos_y, TRUE);
+	mlx_put_img(data, data->pos_x, data->pos_y, FALSE);
 }
 
 static void	move_right(t_data *data)
 {
 	data->map.map[data->pos_y][data->pos_x] = '0';
-	mlx_put_img(data, data->pos_x, data->pos_y, TRUE);
+	mlx_put_img(data, data->pos_x, data->pos_y, FALSE);
 	data->map.map[data->pos_y][++data->pos_x] = 'P';
-	mlx_put_img(data, data->pos_x, data->pos_y, TRUE);
+	mlx_put_img(data, data->pos_x, data->pos_y, FALSE);
 }
 
 static void	move_left(t_data *data)
 {
 	data->map.map[data->pos_y][data->pos_x] = '0';
-	mlx_put_img(data, data->pos_x, data->pos_y, TRUE);
+	mlx_put_img(data, data->pos_x, data->pos_y, FALSE);
 	data->map.map[data->pos_y][--data->pos_x] = 'P';
-	mlx_put_img(data, data->pos_x, data->pos_y, TRUE);
+	mlx_put_img(data, data->pos_x, data->pos_y, FALSE);
 }
 
 int	mlx_move_player(int key, t_data	*data)
@@ -50,6 +50,7 @@ int	mlx_move_player(int key, t_data	*data)
 	data->map.down = data->map.map[data->pos_y + 1][data->pos_x];
 	data->map.left = data->map.map[data->pos_y][data->pos_x - 1];
 	data->map.right = data->map.map[data->pos_y][data->pos_x + 1];
+	mlx_do_key_autorepeaton(data->mlx);
 	if (key == 53)
 		exit_game(data);
 	else if (key == 126 && !ft_strchr("1E", data->map.up))

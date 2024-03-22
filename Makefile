@@ -6,7 +6,7 @@
 #    By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/19 17:23:22 by abadouab          #+#    #+#              #
-#    Updated: 2024/03/18 10:43:43 by abadouab         ###   ########.fr        #
+#    Updated: 2024/03/22 08:08:29 by abadouab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ NAME		=	so_long
 SRCS		=	mandatory/moves.c  \
 				mandatory/so_long.c \
 				mandatory/parce_in.c \
-				mandatory/set_keys.c
+				mandatory/set_keys.c  \
+				mandatory/mlx_init.c
 
 OBJS		=	$(SRCS:.c=.o)
 
