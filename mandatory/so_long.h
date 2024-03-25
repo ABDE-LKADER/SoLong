@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/03/22 17:58:43 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/03/25 11:02:44 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "mylib.h"
 # include <fcntl.h>
 # include <math.h>
-# include <mlx.h>
+# include <MLX42.h>
 
 typedef struct s_map
 {
@@ -32,13 +32,13 @@ typedef struct s_map
 	char	left;
 	char	right;
 	char	**map;
-}		t_map;
+}		map_t;
 
 typedef struct s_img
 {
 	void	*exit[8];
 	void	*wall[12];
-	void	*ground;
+	void	*ground[2];
 	void	*player;
 	void	*collect;
 	int		width;
@@ -47,26 +47,26 @@ typedef struct s_img
 
 typedef struct s_data
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_map	map;
+	mlx_t	*mlx;
+	map_t	map;
 	t_img	img;
+	int		moves;
 	int		pos_x;
 	int		pos_y;
 	int		exit_x;
 	int		exit_y;
 }			t_data;
 
-# define TRUE 1
-# define FALSE 0
-# define DM 60
+# define TILTEL "so_long"
 
 # define GRN "\033[1;32m"
 # define YLW "\033[1;33m"
 # define RED "\033[1;31m"
 # define RST "\033[0m"
 
-# define TILTEL "so_long"
+# define TRUE 1
+# define FALSE 0
+# define DM 60
 
 # define WA 0
 # define W0 1
@@ -89,6 +89,15 @@ typedef struct s_data
 # define E4 5
 # define E5 6
 # define E6 7
+
+# define GR 0
+# define GE 1
+
+# define ESC 53
+# define KLF 123
+# define KRH 124
+# define KDW 125
+# define KUP 126
 
 # define WALL "textures/wall.xpm"
 # define WALL0 "textures/wall0.xpm"
@@ -113,18 +122,23 @@ typedef struct s_data
 # define EXIT6 "textures/exit6.xpm"
 
 # define GROUND "textures/ground.xpm"
+# define GROUND_E "textures/ground_e.xpm"
+
 # define PLAYER "textures/player.xpm"
 # define COLLECT "textures/collect.xpm"
 
-int		mlx_init_img(t_data	*data);
+int		set_exit(t_data *data);
+void	exit_game(t_data *data);
+int		mlx_init_img(t_data *data);
 void	mlx_message_error(int set);
-void	exit_game(t_data	*data);
 int		check_collect(t_data *data);
 int		destroy_notify(t_data *data);
 void	cleanup(char **s, t_data *data);
 int		map_status(t_data *data, int key);
-int		mlx_move_player(int key, t_data	*data);
-void	mlx_parce_input(int ac, char **av, t_map *map);
+int		set_wall(t_data *data, int x, int y);
+void	mlx_move_player(int key, t_data *data);
+void	mlx_parce_input(int ac, char **av, map_t *map);
+void	set_ground(t_data *data, int x, int y, int set);
 void	mlx_put_img(t_data *data, int x, int y, int set);
 
 #endif

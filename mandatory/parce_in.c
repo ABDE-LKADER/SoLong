@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/03/22 09:46:42 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/03/25 06:09:14 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	mlx_message_error(int set)
 	exit(EXIT_FAILURE);
 }
 
-static int	mlx_check_map(t_map *map, char *line, char *next)
+static int	mlx_check_map(map_t *map, char *line, char *next)
 {
 	int	invalid;
 
@@ -52,7 +52,7 @@ static int	mlx_check_map(t_map *map, char *line, char *next)
 	return (invalid);
 }
 
-static void	mlx_map_init(t_map *map, int fd)
+static void	mlx_map_init(map_t *map, int fd)
 {
 	int		index;
 	char	*line;
@@ -71,7 +71,7 @@ static void	mlx_map_init(t_map *map, int fd)
 	map->map[index] = NULL;
 }
 
-static void	mlx_map_resolution(t_map *map, int fd)
+static void	mlx_map_resolution(map_t *map, int fd)
 {
 	int		one;
 	char	*line;
@@ -99,7 +99,7 @@ static void	mlx_map_resolution(t_map *map, int fd)
 		mlx_message_error(3);
 }
 
-void	mlx_parce_input(int ac, char **av, t_map *map)
+void	mlx_parce_input(int ac, char **av, map_t *map)
 {
 	int		fd;
 	char	*extn;

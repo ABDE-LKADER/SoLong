@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 10:46:19 by abadouab          #+#    #+#             */
-/*   Updated: 2024/03/20 10:54:12 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/03/25 06:14:32 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	cleanup(char **s, t_data *data)
 	size_t	i;
 
 	if (data)
-		mlx_destroy_window(data->mlx, data->mlx_win);
+		mlx_close_window(data->mlx);
 	i = 0;
 	while (s[i])
 		free(s[i++]);
@@ -26,13 +26,13 @@ void	cleanup(char **s, t_data *data)
 
 int	destroy_notify(t_data *data)
 {
-	mlx_destroy_window(data->mlx, data->mlx_win);
-	return (exit(0), 0);
+	mlx_close_window(data->mlx);
+	return (exit(EXIT_SUCCESS), 0);
 }
 
-void	exit_game(t_data	*data)
+void	exit_game(t_data *data)
 {
-	mlx_destroy_window(data->mlx, data->mlx_win);
+	mlx_close_window(data->mlx);
 	exit(0);
 }
 
