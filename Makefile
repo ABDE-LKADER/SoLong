@@ -6,7 +6,7 @@
 #    By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/19 17:23:22 by abadouab          #+#    #+#              #
-#    Updated: 2024/03/25 07:31:01 by abadouab         ###   ########.fr        #
+#    Updated: 2024/03/27 15:51:34 by abadouab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ SRCS		=	mandatory/moves.c   \
 				mandatory/so_long.c  \
 				mandatory/parce_in.c  \
 				mandatory/mlx_init.c   \
-				mandatory/set_keys.c    \
+				mandatory/load_png.c    \
+				mandatory/set_keys.c     \
 				mandatory/mlx_space.c
 
 OBJS		=	$(SRCS:.c=.o)

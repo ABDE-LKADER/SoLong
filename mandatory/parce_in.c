@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/03/25 06:09:14 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/03/27 15:57:35 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	mlx_message_error(int set)
 		write(2, RED"Error:\n"YLW"<file>"RST" not found.\n", 50);
 	else if (set == 3)
 		write(2, RED"Error:\n"RST"Invalid "YLW"<Map>"RST".\n", 44);
+	else if (set == 4)
+		write(2, RED"Error:\n"RST"Invalid "YLW"????"RST".\n", 44);
 	exit(EXIT_FAILURE);
 }
 

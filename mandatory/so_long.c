@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/03/25 11:00:42 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/03/27 16:49:31 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ int	main(int ac, char **av)
 	if (!data.mlx)
 		return (cleanup(data.map.map, NULL), EXIT_FAILURE);
 	mlx_key_hook(data.mlx, mlx_move_player, &data);
-	if (mlx_init_img(&data))
-		return (cleanup(data.map.map, &data), mlx_message_error(3),
+	if (!mlx_init_img(&data))
+		return (cleanup(data.map.map, &data), mlx_message_error(4),
 			EXIT_FAILURE);
 	mlx_game_render(&data);
 	mlx_loop(data.mlx);
