@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 17:45:48 by abadouab          #+#    #+#             */
-/*   Updated: 2024/03/11 14:57:50 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/04/07 15:39:35 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <limits.h>
-# include <stdio.h>
+
+/* LIBFT PROTOTYPES */
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
 int		ft_isascii(int c);
 int		ft_isprint(int c);
-size_t	ft_strlen(const char *s);
+int		ft_strlen(const char *s);
 void	*ft_memset(void *b, int c, size_t len);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
@@ -71,23 +72,31 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
+/* PRINTF PROTOTYPES */
+
+# define SPECIFIERS	"cspdiuxX%"
+
 int		print_char(char c);
+int		print_num(int num);
 int		print_string(char *str);
 int		print_address(void *ptr);
-int		print_num(int num);
 int		print_unum(unsigned int num);
 int		print_hex(unsigned int num, char set);
 int		ft_printf(const char *format, ...);
+
+/* GNL PROTOTYPES */
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1337
 # endif
 
+# define END '\0'
+# define NLN '\n'
+
 size_t	ft_search(char *s);
 char	*get_next_line(int fd);
-char	*strdup_line(char *str);
-char	*strdup_next(char *str);
 size_t	strlen_set(char *s, char set);
-char	*join_strings(char *s1, char *s2);
+char	*strdup_set(char *str, char set);
+char	*str_join(char *save, char *load);
 
 #endif

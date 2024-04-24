@@ -5,17 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 19:19:43 by abdel             #+#    #+#             */
-/*   Updated: 2024/01/06 17:36:00 by abadouab         ###   ########.fr       */
+/*   Created: 2023/11/29 19:19:43 by abadouab          #+#    #+#             */
+/*   Updated: 2024/04/19 14:56:58 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mylib.h"
 
-static	int	address_plus(unsigned long num, char set)
+static int	address_plus(unsigned long num, char set)
 {
-	int				len;
-	char			*base;
+	int		len;
+	char	*base;
 
 	len = 0;
 	base = "0123456789abcdef";
@@ -27,7 +27,7 @@ static	int	address_plus(unsigned long num, char set)
 
 int	print_address(void *ptr)
 {
-	int		len;
+	int	len;
 
 	len = 0;
 	len += print_string("0x");
@@ -67,8 +67,8 @@ int	print_unum(unsigned int num)
 
 int	print_hex(unsigned int num, char set)
 {
-	int				len;
-	char			*base;
+	int		len;
+	char	*base;
 
 	len = 0;
 	base = NULL;
