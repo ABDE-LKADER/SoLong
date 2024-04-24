@@ -29,6 +29,7 @@ MYAR		=	MYLIB/libar.a
 
 MLX			=	MLX42/MLX
 GLFW		=	/Users/abadouab/.brew/opt/glfw/lib
+MXAR		=	$(MLX)/libmlx42.a
 
 FLAGS		=	cc -Wall -Wextra
 RM			=	rm -fr
@@ -38,9 +39,21 @@ YELOW 		=	"\033[1;33m"
 REDCL 		=	"\033[1;31m"
 RESET 		=	"\033[0m"
 
-all: $(MLX) $(MYLB) $(NAME)
+all: $(MLX) start $(MYLB) $(NAME) finish
+
+start:
+	@printf "\n"
+	@echo $(GREEN)"Starting build..."
+	@sleep 1
+	@printf "Loading [ "
+
+finish:
+	@echo $(GREEN) ] 100%$(RESET)
+	@echo $(GREEN)Project built.$(RESET)
+	@printf "\n"
 
 $(MLX):
+	@echo $(GREEN)MINILIBX Building ...$(RESET)
 	@cd MLX42; cmake -B MLX
 	@make -C $(MLX) --no-print-directory
 
@@ -50,18 +63,21 @@ $(MYLB):
 $(NAME): $(OBJS)
 	@$(FLAGS) $^ -L$(MYLB) -lar -L$(MLX) -lmlx42 -L$(GLFW) -lglfw -o $(NAME)
 
-$(OBJS): %.o: %.c $(HEADER) $(MYAR)
+$(OBJS): %.o: %.c $(HEADER) $(MYAR) $(MXAR)
 	@$(FLAGS) -c -I $(MYLB) -I MLX42/include/MLX42 $< -o $@
+	@printf $(GREEN)"."$(RESET)
 
 clean:
 	@$(RM) $(OBJS)
 	@make clean -C $(MYLB) --no-print-directory
+	@echo $(YELOW)Cleaning up 🧹💫$(RESET)
 
 fclean: clean
+	@$(RM) $(MLX)
 	@$(RM) $(NAME)
-	@make clean -C $(MLX) --no-print-directory
 	@make fclean -C $(MYLB) --no-print-directory
+	@echo $(REDCL)Purging all files 🗑️$(RESET)
 
 re: fclean all
 
-.PHONY: $(MYLB) $(MLX)
+.PHONY: $(MLX) $(MYLB)
