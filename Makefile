@@ -27,7 +27,10 @@ HEADER		=	mandatory/so_long.h
 MYLB		=	MYLIB
 MYAR		=	MYLIB/libar.a
 
-FLAGS		=	cc -Wall -Wextra -Werror
+MLX			=	MLX42/MLX
+GLFW		=	/Users/abadouab/.brew/opt/glfw/lib
+
+FLAGS		=	cc -Wall -Wextra
 RM			=	rm -fr
 
 GREEN		=	"\033[1;32m"
@@ -35,32 +38,30 @@ YELOW 		=	"\033[1;33m"
 REDCL 		=	"\033[1;31m"
 RESET 		=	"\033[0m"
 
-all: $(MYLB) $(NAME)
-	@echo $(GREEN)Done !!$(RESET)
+all: $(MLX) $(MYLB) $(NAME)
+
+$(MLX):
+	@cd MLX42; cmake -B MLX
+	@make -C $(MLX) --no-print-directory
 
 $(MYLB):
 	@make -C $(MYLB) --no-print-directory
 
 $(NAME): $(OBJS)
-	@$(FLAGS) $^ -L$(MYLB) -lar -L.MLX42/build -lmlx42 -L/Users/abadouab/.brew/opt/glfw/lib -lglfw -framework Cocoa -framework OpenGL -framework IOKit -o $(NAME)
-	@printf "\n"
-
-# $(FLAGS) $^ -L$(MYLB) -lar -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
+	@$(FLAGS) $^ -L$(MYLB) -lar -L$(MLX) -lmlx42 -L$(GLFW) -lglfw -o $(NAME)
 
 $(OBJS): %.o: %.c $(HEADER) $(MYAR)
-	@$(FLAGS) -c -I $(MYLB) -I .MLX42/include/MLX42 $< -o $@
-	@printf $(GREEN)"."$(RESET)
+	@$(FLAGS) -c -I $(MYLB) -I MLX42/include/MLX42 $< -o $@
 
 clean:
 	@$(RM) $(OBJS)
 	@make clean -C $(MYLB) --no-print-directory
-	@echo $(YELOW)Done !!$(RESET)
 
 fclean: clean
 	@$(RM) $(NAME)
+	@make clean -C $(MLX) --no-print-directory
 	@make fclean -C $(MYLB) --no-print-directory
-	@echo $(REDCL)Done !!$(RESET)
 
 re: fclean all
 
-.PHONY: $(MYLB)
+.PHONY: $(MYLB) $(MLX)
