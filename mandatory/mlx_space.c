@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:54:07 by abadouab          #+#    #+#             */
-/*   Updated: 2024/04/27 16:20:07 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/04/27 16:45:13 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	set_wall_plus(t_data *data, int x, int y)
 	{
 		mlx_set_img(data, WALL0, x, y);
 		if (!(y - 1))
-			mlx_set_img(data, WALL_E, x, y);
+			mlx_set_img(data, WALL_E, x + 1, y);
 	}
 }
 

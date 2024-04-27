@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/04/27 16:01:08 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/04/27 16:58:37 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ typedef struct s_data
 
 void	set_exit(t_data *data);
 void	exit_game(t_data *data);
+void	is_valid(t_data *data);
 void	mlx_message_error(int set);
 int		check_collect(t_data *data);
 int		map_status(t_data *data, int key);
