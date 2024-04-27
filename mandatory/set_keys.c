@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 10:46:19 by abadouab          #+#    #+#             */
-/*   Updated: 2024/04/27 16:03:51 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/04/27 17:02:19 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ void	exit_game(t_data *data)
 {
 	cleaning(&data->leak, data);
 	exit(EXIT_SUCCESS);
+}
+
+void	is_valid(t_data *data)
+{
+	is_valid;
 }
 
 int	check_collect(t_data *data)
