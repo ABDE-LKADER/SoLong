@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 10:46:19 by abadouab          #+#    #+#             */
-/*   Updated: 2024/04/27 17:02:19 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/04/27 17:43:39 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,12 @@ void	exit_game(t_data *data)
 	exit(EXIT_SUCCESS);
 }
 
-void	is_valid(t_data *data)
+void	is_valid(t_data *data, int	pos_x, int	pos_y)
 {
-	is_valid;
+	is_valid(data, pos_x++, pos_y);
+	is_valid(data, pos_x--, pos_y);
+	is_valid(data, pos_x, pos_y++);
+	is_valid(data, pos_x, pos_y--);
 }
 
 int	check_collect(t_data *data)
