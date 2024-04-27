@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/03/27 16:43:11 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/04/27 16:01:08 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,54 +18,47 @@
 # include <math.h>
 # include <MLX42.h>
 
+///////////////// HEAP_CLEANER /////////////////
+
+typedef struct s_allocate
+{
+	void				*block;
+	struct s_allocate	*next;
+}						t_allocate;
+
+void	cleanup(t_allocate **collec);
+void	*allocate(t_allocate **collec, size_t count, size_t size);
+
+///////////////// SO_LONG /////////////////
+
 typedef struct s_map
 {
-	int		len;
-	int		exit;
-	int		width;
-	int		height;
-	int		player;
-	int		collect;
-	int		unwanted;
-	char	up;
-	char	down;
-	char	left;
-	char	right;
-	char	**map;
-}		map_t;
-
-typedef struct s_txr
-{
-	mlx_texture_t	*exit[8];
-	mlx_texture_t	*wall[12];
-	mlx_texture_t	*ground[2];
-	mlx_texture_t	*player;
-	mlx_texture_t	*collect;
-}		t_txr;
-
-typedef struct s_img
-{
-	mlx_image_t	*exit[8];
-	mlx_image_t	*wall[12];
-	mlx_image_t	*ground[2];
-	mlx_image_t	*player;
-	mlx_image_t	*collect;
-	int		width;
-	int		height;
-}		t_img;
+	int				len;
+	int				exit;
+	int				width;
+	int				height;
+	int				player;
+	int				collect;
+	int				unwanted;
+	char			up;
+	char			down;
+	char			left;
+	char			right;
+	char			**map;
+	char			**flood;
+}					t_map;
 
 typedef struct s_data
 {
-	mlx_t	*mlx;
-	map_t	map;
-	t_txr	txr;
-	t_img	img;
-	int		moves;
-	int		pos_x;
-	int		pos_y;
-	int		exit_x;
-	int		exit_y;
-}			t_data;
+	mlx_t			*mlx;
+	t_map			map;
+	int				moves;
+	int				pos_x;
+	int				pos_y;
+	int				exit_x;
+	int				exit_y;
+	t_allocate		*leak;
+}					t_data;
 
 # define TILTEL "so_long"
 
@@ -137,19 +130,17 @@ typedef struct s_data
 # define PLAYER "textures/player.png"
 # define COLLECT "textures/collect.png"
 
-int		set_exit(t_data *data);
+void	set_exit(t_data *data);
 void	exit_game(t_data *data);
-int		mlx_init_img(t_data *data);
-int		mlx_load_img(t_txr *txr);
 void	mlx_message_error(int set);
 int		check_collect(t_data *data);
-int		destroy_notify(t_data *data);
-void	cleanup(char **s, t_data *data);
 int		map_status(t_data *data, int key);
-int		set_wall(t_data *data, int x, int y);
-void	mlx_parce_input(int ac, char **av, map_t *map);
-void	set_ground(t_data *data, int x, int y, int set);
-void	mlx_put_img(t_data *data, int x, int y, int set);
+void	set_wall(t_data *data, int x, int y);
+void	set_ground(t_data *data, int x, int y);
+void	mlx_put_img(t_data *data, int x, int y);
+void	cleaning(t_allocate **leak, t_data *data);
+void	mlx_parce_input(int ac, char **av, t_data *data);
 void	mlx_move_player(mlx_key_data_t key, void *param);
+void	mlx_set_img(t_data *data, char *path, int x, int y);
 
 #endif
