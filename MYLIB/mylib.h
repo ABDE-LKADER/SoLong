@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 17:45:48 by abadouab          #+#    #+#             */
-/*   Updated: 2024/04/07 15:39:35 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/04/27 14:19:55 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdarg.h>
 # include <limits.h>
 
-/* LIBFT PROTOTYPES */
+///////////////// LIBFT PROTOTYPES /////////////////
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -72,7 +72,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
-/* PRINTF PROTOTYPES */
+///////////////// PRINTF PROTOTYPES /////////////////
 
 # define SPECIFIERS	"cspdiuxX%"
 
@@ -84,10 +84,10 @@ int		print_unum(unsigned int num);
 int		print_hex(unsigned int num, char set);
 int		ft_printf(const char *format, ...);
 
-/* GNL PROTOTYPES */
+///////////////// GNL PROTOTYPES /////////////////
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1337
+#  define BUFFER_SIZE 1
 # endif
 
 # define END '\0'

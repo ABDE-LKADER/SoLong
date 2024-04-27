@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/03/27 15:57:35 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/04/27 16:23:43 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,21 @@
 void	mlx_message_error(int set)
 {
 	if (set == 0)
-		write(2, RED"Error:\n"YLW"Usage: "RST"./so_long <filename.ber>\n", 57);
+		ft_putstr_fd(RED"Error:\n"YLW"Usage: "
+			RST"./so_long <filename.ber>\n", 2);
 	else if (set == 1)
-		write(2, RED"Error:\n"RST"Input must have "YLW"\".ber\""RST" extension.\n", 63);
+		ft_putstr_fd(RED"Error:\n"RST"Input must have "
+			YLW"\".ber\""RST" extension.\n", 2);
 	else if (set == 2)
-		write(2, RED"Error:\n"YLW"<file>"RST" not found.\n", 50);
+		ft_putstr_fd(RED"Error:\n"YLW"<file>"RST" not found.\n", 2);
 	else if (set == 3)
-		write(2, RED"Error:\n"RST"Invalid "YLW"<Map>"RST".\n", 44);
+		ft_putstr_fd(RED"Error:\n"RST"Invalid "YLW"<Map>"RST".\n", 2);
 	else if (set == 4)
-		write(2, RED"Error:\n"RST"Invalid "YLW"????"RST".\n", 44);
+		ft_putstr_fd(RED"Error:\n"RST"Invalid "YLW"????"RST".\n", 2);
 	exit(EXIT_FAILURE);
 }
 
-static int	mlx_check_map(map_t *map, char *line, char *next)
+static int	mlx_check_map(t_map *map, char *line, char *next)
 {
 	int	invalid;
 
@@ -54,26 +56,32 @@ static int	mlx_check_map(map_t *map, char *line, char *next)
 	return (invalid);
 }
 
-static void	mlx_map_init(map_t *map, int fd)
+static void	mlx_map_init(t_data *data, t_map *map, int fd)
 {
-	int		index;
-	char	*line;
+	int			len;
+	int			index;
+	char		*line;
 
 	index = 0;
+	len = map->width + 1;
 	line = get_next_line(fd);
-	map->map = malloc(map->height * sizeof(char **));
+	map->map = allocate(&data->leak, map->height, sizeof(char **));
+	map->flood = allocate(&data->leak, map->height, sizeof(char **));
 	while (line)
 	{
-		map->map[index] = malloc(map->width + 1 * sizeof(char *));
-		ft_strlcpy(map->map[index], line, map->width + 1);
+		map->map[index] = allocate(&data->leak, len, sizeof(char *));
+		map->flood[index] = allocate(&data->leak, len, sizeof(char *));
+		ft_strlcpy(map->map[index], line, len);
+		ft_strlcpy(map->flood[index], line, len);
 		free(line);
 		line = get_next_line(fd);
 		index++;
 	}
 	map->map[index] = NULL;
+	map->flood[index] = NULL;
 }
 
-static void	mlx_map_resolution(map_t *map, int fd)
+static void	mlx_map_resolution(t_map *map, int fd)
 {
 	int		one;
 	char	*line;
@@ -101,7 +109,7 @@ static void	mlx_map_resolution(map_t *map, int fd)
 		mlx_message_error(3);
 }
 
-void	mlx_parce_input(int ac, char **av, map_t *map)
+void	mlx_parce_input(int ac, char **av, t_data *data)
 {
 	int		fd;
 	char	*extn;
@@ -114,11 +122,11 @@ void	mlx_parce_input(int ac, char **av, map_t *map)
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		mlx_message_error(2);
-	mlx_map_resolution(map, fd);
+	mlx_map_resolution(&data->map, fd);
 	close(fd);
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		mlx_message_error(2);
-	mlx_map_init(map, fd);
+	mlx_map_init(data, &data->map, fd);
 	close(fd);
 }

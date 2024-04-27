@@ -6,34 +6,16 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 10:46:19 by abadouab          #+#    #+#             */
-/*   Updated: 2024/03/25 06:14:32 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/04/27 16:03:51 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	cleanup(char **s, t_data *data)
-{
-	size_t	i;
-
-	if (data)
-		mlx_close_window(data->mlx);
-	i = 0;
-	while (s[i])
-		free(s[i++]);
-	free(s);
-}
-
-int	destroy_notify(t_data *data)
-{
-	mlx_close_window(data->mlx);
-	return (exit(EXIT_SUCCESS), 0);
-}
-
 void	exit_game(t_data *data)
 {
-	mlx_close_window(data->mlx);
-	exit(0);
+	cleaning(&data->leak, data);
+	exit(EXIT_SUCCESS);
 }
 
 int	check_collect(t_data *data)
@@ -58,10 +40,10 @@ int	map_status(t_data *data, int key)
 {
 	if (check_collect(data))
 		return (1);
-	if ((ft_strchr("E", data->map.up) && key == 126)
-		|| (ft_strchr("E", data->map.down) && key == 125)
-		|| (ft_strchr("E", data->map.left) && key == 123)
-		|| (ft_strchr("E", data->map.right) && key == 124))
-			return (0);
+	if ((ft_strchr("E", data->map.up) && key == MLX_KEY_UP)
+		|| (ft_strchr("E", data->map.down) && key == MLX_KEY_DOWN)
+		|| (ft_strchr("E", data->map.left) && key == MLX_KEY_LEFT)
+		|| (ft_strchr("E", data->map.right) && key == MLX_KEY_RIGHT))
+		return (0);
 	return (1);
 }
