@@ -6,13 +6,13 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/04/27 17:29:19 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/04/27 17:44:39 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	mlx_set_img(t_data *data, char *path, int x, int y)
+void	mlx_set_img(t_data *data, char *path, float x, float y)
 {
 	mlx_image_t		*img;
 	mlx_texture_t	*txr;
@@ -64,7 +64,8 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 
-	(mlx_parce_input(ac, av, &data), is_valid(&data));
+	mlx_parce_input(ac, av, &data);
+	is_valid(&data, data.pos_x, data.pos_y);
 	data.mlx = mlx_init(data.map.width * DM,
 			data.map.height * DM, TILTEL, false);
 	if (!data.mlx)

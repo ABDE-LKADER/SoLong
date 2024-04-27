@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/04/27 16:58:37 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/04/27 17:44:07 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,6 @@ typedef struct s_data
 
 void	set_exit(t_data *data);
 void	exit_game(t_data *data);
-void	is_valid(t_data *data);
 void	mlx_message_error(int set);
 int		check_collect(t_data *data);
 int		map_status(t_data *data, int key);
@@ -140,8 +139,9 @@ void	set_wall(t_data *data, int x, int y);
 void	set_ground(t_data *data, int x, int y);
 void	mlx_put_img(t_data *data, int x, int y);
 void	cleaning(t_allocate **leak, t_data *data);
+void	is_valid(t_data *data, int	pos_x, int	pos_y);
 void	mlx_parce_input(int ac, char **av, t_data *data);
 void	mlx_move_player(mlx_key_data_t key, void *param);
-void	mlx_set_img(t_data *data, char *path, int x, int y);
+void	mlx_set_img(t_data *data, char *path, float x, float y);
 
 #endif
