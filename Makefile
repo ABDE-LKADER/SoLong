@@ -17,6 +17,7 @@ SRCS		=	mandatory/moves.c   \
 				mandatory/parce_in.c  \
 				mandatory/set_keys.c   \
 				mandatory/allocate.c    \
+				mandatory/load_img.c     \
 				mandatory/mlx_space.c
 
 OBJS		=	$(SRCS:.c=.o)
@@ -30,7 +31,7 @@ MLX			=	MLX42/MLX
 GLFW		=	/Users/abadouab/.brew/opt/glfw/lib
 MXAR		=	$(MLX)/libmlx42.a
 
-FLAGS		=	cc -Wall -Wextra
+FLAGS		=	cc
 RM			=	rm -fr
 
 GREEN		=	"\033[1;32m"

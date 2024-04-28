@@ -12,38 +12,34 @@
 
 #include "so_long.h"
 
-void	mlx_set_img(t_data *data, char *path, float x, float y)
+void	mlx_do_effects(t_data *data, void *param)
 {
-	mlx_image_t		*img;
-	mlx_texture_t	*txr;
-
-	txr = mlx_load_png(path);
-	if (!txr)
-		(cleaning(&data->leak, data), exit(EXIT_FAILURE));
-	img = mlx_texture_to_image(data->mlx, txr);
-	mlx_image_to_window(data->mlx, img, x * DM, y * DM);
-	mlx_delete_texture(txr);
+	;
 }
 
 void	mlx_put_img(t_data *data, int x, int y)
 {
-	set_ground(data, x, y);
+	int		px;
+	int		py;
+
+	(TRUE) && (px = x * DM, py = y * DM);
+	set_ground(data, data->img, x, y);
 	if (!check_collect(data))
-		set_exit(data);
+		set_exit(data, data->img, data->exit_x, data->exit_y);
 	if (data->map.map[y][x] == '1')
-		set_wall(data, x, y);
+		set_wall(data, data->img, x, y);
 	if (data->map.map[y][x] == 'E')
 	{
 		(1) && (data->exit_x = x, data->exit_y = y);
-		mlx_set_img(data, EXIT, x, y);
+		mlx_image_to_window(data->mlx, data->img.exit[EX], px, py);
 	}
 	else if (data->map.map[y][x] == 'P')
 	{
 		(1) && (data->pos_x = x, data->pos_y = y);
-		mlx_set_img(data, PLAYER, x, y);
+		mlx_image_to_window(data->mlx, data->img.player, px, py);
 	}
 	else if (data->map.map[y][x] == 'C')
-		mlx_set_img(data, COLLECT, x, y);
+		mlx_image_to_window(data->mlx, data->img.collect, px, py);
 }
 
 static void	mlx_game_render(t_data *data)
@@ -64,13 +60,16 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 
+	data.leak = NULL;
 	mlx_parce_input(ac, av, &data);
-	is_valid(&data, data.pos_x, data.pos_y);
+	// is_valid(&data, data.pos_x, data.pos_y);
 	data.mlx = mlx_init(data.map.width * DM,
 			data.map.height * DM, TILTEL, false);
 	if (!data.mlx)
 		return (cleanup(&data.leak), EXIT_FAILURE);
+	mlx_init_img(&data);
 	mlx_key_hook(data.mlx, mlx_move_player, &data);
+	mlx_loop_hook(data.mlx, mlx_do_effects, &data);
 	mlx_game_render(&data);
 	mlx_loop(data.mlx);
 }

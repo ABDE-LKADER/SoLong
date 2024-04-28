@@ -18,12 +18,21 @@ void	exit_game(t_data *data)
 	exit(EXIT_SUCCESS);
 }
 
-void	is_valid(t_data *data, int	pos_x, int	pos_y)
+void	is_valid(char **map, int pos_x, int pos_y)
 {
-	is_valid(data, pos_x++, pos_y);
-	is_valid(data, pos_x--, pos_y);
-	is_valid(data, pos_x, pos_y++);
-	is_valid(data, pos_x, pos_y--);
+	if (map[pos_y][pos_x] == '1'
+		|| map[pos_y][pos_x] == 'X')
+		return ;
+	if (map[pos_y][pos_x] == 'E')
+		map[pos_y][pos_x] = '1';
+	if (map[pos_y][pos_x] != '1')
+	{
+		map[pos_y][pos_x] = 'X';
+		is_valid(map, pos_x + 1, pos_y);
+		is_valid(map, pos_x - 1, pos_y);
+		is_valid(map, pos_x, pos_y + 1);
+		is_valid(map, pos_x, pos_y - 1);
+	}
 }
 
 int	check_collect(t_data *data)

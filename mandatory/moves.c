@@ -12,61 +12,47 @@
 
 #include "so_long.h"
 
-static void	move_up(t_data *data)
+static void	moving(t_data *data, int direction)
 {
 	data->map.map[data->pos_y][data->pos_x] = '0';
 	mlx_put_img(data, data->pos_x, data->pos_y);
-	data->map.map[--data->pos_y][data->pos_x] = 'P';
+	if (direction == MLX_KEY_UP)
+		--data->pos_y;
+	if (direction == MLX_KEY_DOWN)
+		++data->pos_y;
+	if (direction == MLX_KEY_RIGHT)
+		++data->pos_x;
+	if (direction == MLX_KEY_LEFT)
+		--data->pos_x;
+	data->map.map[data->pos_y][data->pos_x] = 'P';
 	mlx_put_img(data, data->pos_x, data->pos_y);
 }
 
-static void	move_down(t_data *data)
+void	mlx_move_player(mlx_key_data_t key, void *param)
 {
-	data->map.map[data->pos_y][data->pos_x] = '0';
-	mlx_put_img(data, data->pos_x, data->pos_y);
-	data->map.map[++data->pos_y][data->pos_x] = 'P';
-	mlx_put_img(data, data->pos_x, data->pos_y);
-}
-
-static void	move_right(t_data *data)
-{
-	data->map.map[data->pos_y][data->pos_x] = '0';
-	mlx_put_img(data, data->pos_x, data->pos_y);
-	data->map.map[data->pos_y][++data->pos_x] = 'P';
-	mlx_put_img(data, data->pos_x, data->pos_y);
-}
-
-static void	move_left(t_data *data)
-{
-	data->map.map[data->pos_y][data->pos_x] = '0';
-	mlx_put_img(data, data->pos_x, data->pos_y);
-	data->map.map[data->pos_y][--data->pos_x] = 'P';
-	mlx_put_img(data, data->pos_x, data->pos_y);
-}
-
-void	mlx_move_player(mlx_key_data_t key, void	*param)
-{
+	t_map	*map;
 	t_data	*data;
 
 	data = param;
-	data->map.up = data->map.map[data->pos_y - 1][data->pos_x];
-	data->map.down = data->map.map[data->pos_y + 1][data->pos_x];
-	data->map.left = data->map.map[data->pos_y][data->pos_x - 1];
-	data->map.right = data->map.map[data->pos_y][data->pos_x + 1];
+	map = &data->map;
+	map->up = map->map[data->pos_y - 1][data->pos_x];
+	map->down = map->map[data->pos_y + 1][data->pos_x];
+	map->right = map->map[data->pos_y][data->pos_x + 1];
+	map->left = map->map[data->pos_y][data->pos_x - 1];
 	if (key.key == MLX_KEY_ESCAPE)
 		exit_game(data);
 	if (key.key == MLX_KEY_UP && key.action != MLX_RELEASE
 		&& !ft_strchr("1E", data->map.up))
-		move_up(data);
+		moving(data, MLX_KEY_UP);
 	if (key.key == MLX_KEY_DOWN && key.action != MLX_RELEASE
 		&& !ft_strchr("1E", data->map.down))
-		move_down(data);
+		moving(data, MLX_KEY_DOWN);
 	if (key.key == MLX_KEY_RIGHT && key.action != MLX_RELEASE
 		&& !ft_strchr("1E", data->map.right))
-		move_right(data);
+		moving(data, MLX_KEY_RIGHT);
 	if (key.key == MLX_KEY_LEFT && key.action != MLX_RELEASE
 		&& !ft_strchr("1E", data->map.left))
-		move_left(data);
+		moving(data, MLX_KEY_LEFT);
 	if (!map_status(data, key.key))
 		exit_game(data);
 }
