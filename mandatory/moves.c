@@ -12,10 +12,23 @@
 
 #include "so_long.h"
 
+void	mlx_set_moves(t_data *data, int x, int y)
+{
+	int		px;
+	int		py;
+
+	(TRUE) && (px = x * DM, py = y * DM);
+	mlx_image_to_window(data->mlx, data->img.ground[GR], px, py);
+	if (!checker_set(data->map.map, 'C'))
+		set_exit(data, data->img, data->exit_x, data->exit_y);
+	if (data->map.map[y][x] == 'P')
+		mlx_image_to_window(data->mlx, data->img.player, px, py);
+}
+
 static void	moving(t_data *data, int direction)
 {
 	data->map.map[data->pos_y][data->pos_x] = '0';
-	mlx_put_img(data, data->pos_x, data->pos_y);
+	mlx_set_moves(data, data->pos_x, data->pos_y);
 	if (direction == MLX_KEY_UP)
 		--data->pos_y;
 	if (direction == MLX_KEY_DOWN)
@@ -25,7 +38,8 @@ static void	moving(t_data *data, int direction)
 	if (direction == MLX_KEY_LEFT)
 		--data->pos_x;
 	data->map.map[data->pos_y][data->pos_x] = 'P';
-	mlx_put_img(data, data->pos_x, data->pos_y);
+	mlx_set_moves(data, data->pos_x, data->pos_y);
+	ft_printf(GRN"moves: %d\n"RST, data->moves++);
 }
 
 void	mlx_move_player(mlx_key_data_t key, void *param)
@@ -53,6 +67,6 @@ void	mlx_move_player(mlx_key_data_t key, void *param)
 	if (key.key == MLX_KEY_LEFT && key.action != MLX_RELEASE
 		&& !ft_strchr("1E", data->map.left))
 		moving(data, MLX_KEY_LEFT);
-	if (!map_status(data, key.key))
+	if (!map_status(data->map, key.key))
 		exit_game(data);
 }

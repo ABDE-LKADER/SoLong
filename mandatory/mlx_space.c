@@ -12,15 +12,6 @@
 
 #include "so_long.h"
 
-void	set_ground(t_data *data, t_img img, int x, int y)
-{
-	int		px;
-	int		py;
-
-	(TRUE) && (px = x * DM, py = y * DM);
-	mlx_image_to_window(data->mlx, img.ground[GR], px, py);
-}
-
 void	set_exit(t_data *data, t_img img, int x, int y)
 {
 	int		px;

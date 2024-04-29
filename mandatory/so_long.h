@@ -54,7 +54,7 @@ typedef struct s_img
 	mlx_image_t		*collect;
 	mlx_image_t		*exit[8];
 	mlx_image_t		*wall[12];
-	mlx_image_t		*ground[2];
+	mlx_image_t		*ground[4];
 }				t_img;
 
 typedef struct s_data
@@ -67,6 +67,8 @@ typedef struct s_data
 	int				pos_y;
 	int				exit_x;
 	int				exit_y;
+	int				timer;
+	int				count;
 	t_allocate		*leak;
 }					t_data;
 
@@ -104,7 +106,8 @@ typedef struct s_data
 # define E6 7
 
 # define GR 0
-# define GE 1
+# define G2 2
+# define G3 3
 
 # define WALL "textures/wall.png"
 # define WALL0 "textures/wall0.png"
@@ -135,18 +138,17 @@ typedef struct s_data
 # define PLAYER "textures/player.png"
 # define COLLECT "textures/collect.png"
 
+void	init_data(t_data *data);
 void	exit_game(t_data *data);
 void	mlx_init_img(t_data *data);
 void	mlx_message_error(int set);
-int		check_collect(t_data *data);
-int		map_status(t_data *data, int key);
-void	mlx_put_img(t_data *data, int x, int y);
+int		map_status(t_map map, int key);
+int		checker_set(char **map, char set);
 void	cleaning(t_allocate **leak, t_data *data);
-void	is_valid(char **map, int pos_x, int pos_y);
+void	flood_fill(char **map, int pos_x, int pos_y);
 void	set_exit(t_data *data, t_img img, int x, int y);
 void	mlx_parce_input(int ac, char **av, t_data *data);
 void	mlx_move_player(mlx_key_data_t key, void *param);
 void	set_wall(t_data *data, t_img img, int x, int y);
-void	set_ground(t_data *data, t_img img, int x, int y);
 
 #endif

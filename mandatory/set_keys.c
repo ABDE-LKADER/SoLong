@@ -18,7 +18,7 @@ void	exit_game(t_data *data)
 	exit(EXIT_SUCCESS);
 }
 
-void	is_valid(char **map, int pos_x, int pos_y)
+void	flood_fill(char **map, int pos_x, int pos_y)
 {
 	if (map[pos_y][pos_x] == '1'
 		|| map[pos_y][pos_x] == 'X')
@@ -28,39 +28,39 @@ void	is_valid(char **map, int pos_x, int pos_y)
 	if (map[pos_y][pos_x] != '1')
 	{
 		map[pos_y][pos_x] = 'X';
-		is_valid(map, pos_x + 1, pos_y);
-		is_valid(map, pos_x - 1, pos_y);
-		is_valid(map, pos_x, pos_y + 1);
-		is_valid(map, pos_x, pos_y - 1);
+		flood_fill(map, pos_x + 1, pos_y);
+		flood_fill(map, pos_x - 1, pos_y);
+		flood_fill(map, pos_x, pos_y + 1);
+		flood_fill(map, pos_x, pos_y - 1);
 	}
 }
 
-int	check_collect(t_data *data)
+int	checker_set(char **map, char set)
 {
 	int		x;
 	int		y;
 
 	y = -1;
-	while (data->map.map[++y])
+	while (map[++y])
 	{
 		x = -1;
-		while (data->map.map[y][++x])
+		while (map[y][++x])
 		{
-			if (data->map.map[y][x] == 'C')
+			if (map[y][x] == set)
 				return (1);
 		}
 	}
 	return (0);
 }
 
-int	map_status(t_data *data, int key)
+int	map_status(t_map map, int key)
 {
-	if (check_collect(data))
+	if (checker_set(map.map, 'C'))
 		return (1);
-	if ((ft_strchr("E", data->map.up) && key == MLX_KEY_UP)
-		|| (ft_strchr("E", data->map.down) && key == MLX_KEY_DOWN)
-		|| (ft_strchr("E", data->map.left) && key == MLX_KEY_LEFT)
-		|| (ft_strchr("E", data->map.right) && key == MLX_KEY_RIGHT))
+	if ((ft_strchr("E", map.up) && key == MLX_KEY_UP)
+		|| (ft_strchr("E", map.down) && key == MLX_KEY_DOWN)
+		|| (ft_strchr("E", map.left) && key == MLX_KEY_LEFT)
+		|| (ft_strchr("E", map.right) && key == MLX_KEY_RIGHT))
 		return (0);
 	return (1);
 }

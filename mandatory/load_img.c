@@ -66,4 +66,6 @@ void	mlx_init_img(t_data	*data)
 	img->player = mlx_init_new_img(data, PLAYER);
 	img->collect = mlx_init_new_img(data, COLLECT);
 	img->ground[GR] = mlx_init_new_img(data, GROUND);
+	img->ground[G2] = mlx_init_new_img(data, GROUND2);
+	img->ground[G3] = mlx_init_new_img(data, GROUND3);
 }

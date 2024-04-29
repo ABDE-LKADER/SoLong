@@ -12,6 +12,18 @@
 
 #include "so_long.h"
 
+void	init_data(t_data *data)
+{
+	data->leak = NULL;
+	data->moves = 1;
+	data->count = 0;
+	data->pos_x = 0;
+	data->pos_x = 0;
+	data->exit_x = 0;
+	data->exit_y = 0;
+	data->timer = 0;
+}
+
 void	cleaning(t_allocate **leak, t_data *data)
 {
 	if (data)
