@@ -52,6 +52,7 @@ int	main(int ac, char **av)
 	mlx_init_img(&data);
 	mlx_key_hook(data.mlx, mlx_move_player, &data);
 	mlx_loop_hook(data.mlx, mlx_do_effects, &data);
+	mlx_loop_hook(data.mlx, mlx_fire_effects, &data);
 	mlx_game_render(&data);
 	mlx_loop(data.mlx);
 }

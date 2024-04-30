@@ -161,5 +161,6 @@ void	mlx_parce_input(int ac, char **av, t_data *data);
 void	mlx_move_player(mlx_key_data_t key, void *param);
 void	set_exit(t_data *data, mlx_image_t **img, int x, int y);
 void	set_wall(t_data *data, mlx_image_t **img, int x, int y);
+void	mlx_fire_effects(void *param);
 
 #endif
