@@ -15,6 +15,7 @@
 void	init_data(t_data *data)
 {
 	data->leak = NULL;
+	data->set = 1;
 	data->moves = 1;
 	data->count = 0;
 	data->pos_x = 0;

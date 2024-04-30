@@ -53,14 +53,15 @@ int	checker_set(char **map, char set)
 	return (0);
 }
 
-int	map_status(t_map map, int key)
+int	map_status(t_map map, mlx_key_data_t key)
 {
 	if (checker_set(map.map, 'C'))
 		return (1);
-	if ((ft_strchr("E", map.up) && key == MLX_KEY_UP)
-		|| (ft_strchr("E", map.down) && key == MLX_KEY_DOWN)
-		|| (ft_strchr("E", map.left) && key == MLX_KEY_LEFT)
-		|| (ft_strchr("E", map.right) && key == MLX_KEY_RIGHT))
+	if (key.action != MLX_RELEASE
+		&& ((ft_strchr("E", map.up) && key.key == MLX_KEY_UP)
+		|| (ft_strchr("E", map.down) && key.key == MLX_KEY_DOWN)
+		|| (ft_strchr("E", map.left) && key.key == MLX_KEY_LEFT)
+		|| (ft_strchr("E", map.right) && key.key == MLX_KEY_RIGHT)))
 		return (0);
 	return (1);
 }

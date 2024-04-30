@@ -11,11 +11,7 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	mlx_do_effects(t_data *data, void *param)
-{
-	;
-}
+#include <time.h>
 
 static void	mlx_game_render(t_data *data)
 {
@@ -31,15 +27,15 @@ static void	mlx_game_render(t_data *data)
 		while (data->map.map[y][++x])
 		{
 			(TRUE) && (px = x * DM, py = y * DM);
-			mlx_image_to_window(data->mlx, data->img.ground[GR], px, py);
+			mlx_image_to_window(data->mlx, data->img[GR], px, py);
 			if (data->map.map[y][x] == '1')
 				set_wall(data, data->img, x, y);
 			else if (data->map.map[y][x] == 'E')
-				mlx_image_to_window(data->mlx, data->img.exit[EX], px, py);
+				mlx_image_to_window(data->mlx, data->img[E1], px, py);
 			else if (data->map.map[y][x] == 'P')
-				mlx_image_to_window(data->mlx, data->img.player, px, py);
+				mlx_image_to_window(data->mlx, data->img[PL], px, py);
 			else if (data->map.map[y][x] == 'C')
-				mlx_image_to_window(data->mlx, data->img.collect, px, py);
+				mlx_image_to_window(data->mlx, data->img[F1], px, py);
 		}
 	}
 }

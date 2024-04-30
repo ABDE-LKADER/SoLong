@@ -21,51 +21,48 @@ static mlx_image_t	*mlx_init_new_img(t_data *data, char *path)
 	if (!txr)
 		(cleaning(&data->leak, data), exit(EXIT_FAILURE));
 	img = mlx_texture_to_image(data->mlx, txr);
-	if (!txr)
+	if (!img)
 		(mlx_delete_texture(txr), cleaning(&data->leak, data),
 			exit(EXIT_FAILURE));
 	mlx_delete_texture(txr);
 	return (img);
 }
 
-static void	mlx_init_exit(t_data *data, t_img *img)
+static void	mlx_init_plus(t_data *data, mlx_image_t **img)
 {
-	img->exit[EX] = mlx_init_new_img(data, EXIT);
-	img->exit[E0] = mlx_init_new_img(data, EXIT0);
-	img->exit[E1] = mlx_init_new_img(data, EXIT1);
-	img->exit[E2] = mlx_init_new_img(data, EXIT2);
-	img->exit[E3] = mlx_init_new_img(data, EXIT3);
-	img->exit[E4] = mlx_init_new_img(data, EXIT4);
-	img->exit[E5] = mlx_init_new_img(data, EXIT5);
-	img->exit[E6] = mlx_init_new_img(data, EXIT6);
-}
-
-static void	mlx_init_wall(t_data *data, t_img *img)
-{
-	img->wall[WA] = mlx_init_new_img(data, WALL);
-	img->wall[W0] = mlx_init_new_img(data, WALL0);
-	img->wall[W2] = mlx_init_new_img(data, WALL2);
-	img->wall[WE] = mlx_init_new_img(data, WALL_E);
-	img->wall[WL] = mlx_init_new_img(data, WALL_L);
-	img->wall[WR] = mlx_init_new_img(data, WALL_R);
-	img->wall[WU] = mlx_init_new_img(data, WALL_U);
-	img->wall[WD] = mlx_init_new_img(data, WALL_D);
-	img->wall[DL] = mlx_init_new_img(data, WALL_DL);
-	img->wall[UL] = mlx_init_new_img(data, WALL_UL);
-	img->wall[DR] = mlx_init_new_img(data, WALL_DR);
-	img->wall[UR] = mlx_init_new_img(data, WALL_UR);
+	img[GR] = mlx_init_new_img(data, GROUND);
+	img[PL] = mlx_init_new_img(data, PLAYER);
+	img[E1] = mlx_init_new_img(data, EXIT1);
+	img[E2] = mlx_init_new_img(data, EXIT2);
+	img[E3] = mlx_init_new_img(data, EXIT3);
+	img[E4] = mlx_init_new_img(data, EXIT4);
+	img[E5] = mlx_init_new_img(data, EXIT5);
+	img[E6] = mlx_init_new_img(data, EXIT6);
+	img[E7] = mlx_init_new_img(data, EXIT7);
+	img[E8] = mlx_init_new_img(data, EXIT8);
+	img[F1] = mlx_init_new_img(data, FIRE1);
+	img[F2] = mlx_init_new_img(data, FIRE2);
+	img[F3] = mlx_init_new_img(data, FIRE3);
+	img[F4] = mlx_init_new_img(data, FIRE4);
+	img[F5] = mlx_init_new_img(data, FIRE5);
+	img[F6] = mlx_init_new_img(data, FIRE6);
+	img[F7] = mlx_init_new_img(data, FIRE7);
+	img[F8] = mlx_init_new_img(data, FIRE8);
 }
 
 void	mlx_init_img(t_data	*data)
 {
-	t_img	*img;
-
-	img = &data->img;
-	mlx_init_wall(data, img);
-	mlx_init_exit(data, img);
-	img->player = mlx_init_new_img(data, PLAYER);
-	img->collect = mlx_init_new_img(data, COLLECT);
-	img->ground[GR] = mlx_init_new_img(data, GROUND);
-	img->ground[G2] = mlx_init_new_img(data, GROUND2);
-	img->ground[G3] = mlx_init_new_img(data, GROUND3);
+	mlx_init_plus(data, data->img);
+	data->img[W1] = mlx_init_new_img(data, WALL1);
+	data->img[W2] = mlx_init_new_img(data, WALL2);
+	data->img[W3] = mlx_init_new_img(data, WALL3);
+	data->img[W4] = mlx_init_new_img(data, WALL4);
+	data->img[W5] = mlx_init_new_img(data, WALL5);
+	data->img[W6] = mlx_init_new_img(data, WALL6);
+	data->img[W7] = mlx_init_new_img(data, WALL7);
+	data->img[W8] = mlx_init_new_img(data, WALL8);
+	data->img[S1] = mlx_init_new_img(data, SPACE1);
+	data->img[S2] = mlx_init_new_img(data, SPACE2);
+	data->img[S3] = mlx_init_new_img(data, SPACE3);
+	data->img[S4] = mlx_init_new_img(data, SPACE4);
 }

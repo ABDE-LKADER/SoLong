@@ -18,7 +18,8 @@ SRCS		=	mandatory/moves.c   \
 				mandatory/set_keys.c   \
 				mandatory/allocate.c    \
 				mandatory/load_img.c     \
-				mandatory/mlx_space.c
+				mandatory/mlx_space.c     \
+				mandatory/mlx_sprites.c
 
 OBJS		=	$(SRCS:.c=.o)
 
