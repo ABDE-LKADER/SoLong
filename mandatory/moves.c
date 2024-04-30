@@ -69,5 +69,5 @@ void	mlx_move_player(mlx_key_data_t key, void *param)
 		&& !ft_strchr("1E", data->map.left))
 		moving(data, MLX_KEY_LEFT);
 	if (!map_status(data->map, key))
-		exit_game(data);
+		(TRUE) && (moving(data, key.key), exit_game(data), TRUE);
 }

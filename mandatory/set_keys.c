@@ -59,9 +59,9 @@ int	map_status(t_map map, mlx_key_data_t key)
 		return (1);
 	if (key.action != MLX_RELEASE
 		&& ((ft_strchr("E", map.up) && key.key == MLX_KEY_UP)
-		|| (ft_strchr("E", map.down) && key.key == MLX_KEY_DOWN)
-		|| (ft_strchr("E", map.left) && key.key == MLX_KEY_LEFT)
-		|| (ft_strchr("E", map.right) && key.key == MLX_KEY_RIGHT)))
+			|| (ft_strchr("E", map.down) && key.key == MLX_KEY_DOWN)
+			|| (ft_strchr("E", map.left) && key.key == MLX_KEY_LEFT)
+			|| (ft_strchr("E", map.right) && key.key == MLX_KEY_RIGHT)))
 		return (0);
 	return (1);
 }

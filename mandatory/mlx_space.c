@@ -12,25 +12,6 @@
 
 #include "so_long.h"
 
-void	set_exit(t_data *data, mlx_image_t **img, int x, int y)
-{
-	// int		px;
-	// int		py;
-	// static int	index = E1;
-	// static int	count;
-
-	// (TRUE) && (px = x * DM, py = y * DM);
-	// while (index < E7)
-	// {
-	// 	if (count++ % 10 == 0)
-	// 	{
-			// mlx_image_to_window(data->mlx, img[GR], px, py);
-			// mlx_image_to_window(data->mlx, img[E8], px, py);
-			// mlx_image_to_window(data->mlx, img[E7], px, py);
-		// }
-	// }
-}
-
 static void	set_wall_plus(t_data *data, mlx_image_t **img, int x, int y)
 {
 	int		px;

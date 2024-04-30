@@ -106,12 +106,6 @@ void	*allocate(t_allocate **collec, size_t count, size_t size);
 
 ///////////////// SO_LONG STRUCTS /////////////////
 
-typedef struct s_pos
-{
-	int		x;
-	int		y;
-}			t_pos;
-
 typedef struct s_map
 {
 	int				len;
@@ -159,8 +153,6 @@ int		map_status(t_map map, mlx_key_data_t key);
 void	flood_fill(char **map, int pos_x, int pos_y);
 void	mlx_parce_input(int ac, char **av, t_data *data);
 void	mlx_move_player(mlx_key_data_t key, void *param);
-void	set_exit(t_data *data, mlx_image_t **img, int x, int y);
 void	set_wall(t_data *data, mlx_image_t **img, int x, int y);
-void	mlx_fire_effects(void *param);
 
 #endif
