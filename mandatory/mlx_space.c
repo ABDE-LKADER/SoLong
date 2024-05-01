@@ -12,6 +12,25 @@
 
 #include "so_long.h"
 
+void	mlx_draw_string(t_data *data)
+{
+	char	*steps;
+	char	*collect;
+
+	steps = ft_itoa(data->steps);
+	collect = ft_itoa(data->map.collect);
+	mlx_image_to_window(data->mlx, data->img[W1], 0, 0);
+	mlx_image_to_window(data->mlx, data->img[W2], DM, 0);
+	mlx_image_to_window(data->mlx, data->img[W2], DM * 2, 0);
+	mlx_image_to_window(data->mlx, data->img[W2], DM * 3, 0);
+	mlx_image_to_window(data->mlx, data->img[W2], DM * 4, 0);
+	mlx_image_to_window(data->mlx, data->img[W2], DM * 5, 0);
+	mlx_put_string(data->mlx, "COLLECT: ", 25, 6);
+	mlx_put_string(data->mlx, collect, 109, 6);
+	mlx_put_string(data->mlx, "STEPS: ", 152, 6);
+	mlx_put_string(data->mlx, steps, 215, 6);
+}
+
 static void	set_wall_plus(t_data *data, mlx_image_t **img, int x, int y)
 {
 	int		px;

@@ -38,6 +38,7 @@ static void	mlx_game_render(t_data *data)
 				mlx_image_to_window(data->mlx, data->img[F1], px, py);
 		}
 	}
+	mlx_draw_string(data);
 }
 
 int	main(int ac, char **av)
@@ -54,4 +55,5 @@ int	main(int ac, char **av)
 	mlx_loop_hook(data.mlx, mlx_do_effects, &data);
 	mlx_game_render(&data);
 	mlx_loop(data.mlx);
+	return (EXIT_SUCCESS);
 }

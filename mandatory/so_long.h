@@ -71,7 +71,25 @@ void	*allocate(t_allocate **collec, size_t count, size_t size);
 # define S2 27
 # define S3 28
 # define S4 29
-# define FN 30
+# define A1 30
+# define A2 31
+# define I1 32
+# define I2 33
+# define I3 34
+# define I4 35
+# define I5 36
+# define I6 37
+# define I7 38
+# define I8 39
+# define R1 40
+# define R2 41
+# define R3 42
+# define R4 43
+# define R5 44
+# define R6 45
+# define R7 46
+# define R8 47
+# define FN 48
 
 # define EXIT1 "textures/EXIT1.png"
 # define EXIT2 "textures/EXIT2.png"
@@ -97,12 +115,31 @@ void	*allocate(t_allocate **collec, size_t count, size_t size);
 # define WALL6 "textures/WALL6.png"
 # define WALL7 "textures/WALL7.png"
 # define WALL8 "textures/WALL8.png"
+# define FALL1 "textures/FALL1.png"
+# define FALL2 "textures/FALL2.png"
+# define IDLE1 "textures/IDLE1.png"
+# define IDLE2 "textures/IDLE2.png"
+# define IDLE3 "textures/IDLE3.png"
+# define IDLE4 "textures/IDLE4.png"
+# define IDLE5 "textures/IDLE5.png"
+# define IDLE6 "textures/IDLE6.png"
+# define IDLE7 "textures/IDLE7.png"
+# define IDLE8 "textures/IDLE8.png"
+# define RIGHT1 "textures/RIGHT1.png"
+# define RIGHT2 "textures/RIGHT2.png"
+# define RIGHT3 "textures/RIGHT3.png"
+# define RIGHT4 "textures/RIGHT4.png"
+# define RIGHT5 "textures/RIGHT5.png"
+# define RIGHT6 "textures/RIGHT6.png"
+# define RIGHT7 "textures/RIGHT7.png"
+# define RIGHT8 "textures/RIGHT8.png"
 # define SPACE1 "textures/SPACE1.png"
 # define SPACE2 "textures/SPACE2.png"
 # define SPACE3 "textures/SPACE3.png"
 # define SPACE4 "textures/SPACE4.png"
 # define GROUND "textures/GROUND.png"
 # define PLAYER "textures/PLAYER.png"
+# define BANNER "textures/BANNER.png"
 
 ///////////////// SO_LONG STRUCTS /////////////////
 
@@ -128,12 +165,11 @@ typedef struct s_data
 	mlx_t			*mlx;
 	t_map			map;
 	int				set;
-	int				moves;
+	int				steps;
 	int				pos_x;
 	int				pos_y;
 	int				exit_x;
 	int				exit_y;
-	int				timer;
 	int				count;
 	t_allocate		*leak;
 	mlx_image_t		*img[FN];
@@ -142,11 +178,12 @@ typedef struct s_data
 ///////////////// SO_LONG PROTOTYPES /////////////////
 
 void	init_data(t_data *data);
-void	exit_game(t_data *data);
 void	mlx_init_img(t_data *data);
 void	mlx_message_error(int set);
 void	mlx_do_effects(void *param);
+void	mlx_draw_string(t_data *data);
 int		checker_set(char **map, char set);
+void	exit_game(t_data *data, int move);
 void	moving(t_data *data, int direction);
 void	cleaning(t_allocate **leak, t_data *data);
 int		map_status(t_map map, mlx_key_data_t key);

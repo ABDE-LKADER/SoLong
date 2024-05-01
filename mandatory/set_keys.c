@@ -12,8 +12,10 @@
 
 #include "so_long.h"
 
-void	exit_game(t_data *data)
+void	exit_game(t_data *data, int move)
 {
+	if (move != MLX_KEY_ESCAPE)
+		moving(data, move);
 	cleaning(&data->leak, data);
 	exit(EXIT_SUCCESS);
 }
