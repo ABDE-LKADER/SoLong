@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:13:26 by abadouab          #+#    #+#             */
-/*   Updated: 2024/04/27 16:45:59 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/07 15:03:40 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	moving(t_data *data, int direction)
 	data->map.map[data->pos_y][data->pos_x] = 'P';
 	mlx_set_moves(data, direction, data->pos_x, data->pos_y);
 	ft_printf(GRN"moves: %d\n"RST, data->steps++);
+	mlx_draw_string(data);
 }
 
 void	mlx_move_player(mlx_key_data_t key, void *param)

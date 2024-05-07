@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_space.c                                        :+:      :+:    :+:   */
+/*   mlx_sprites.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:54:07 by abadouab          #+#    #+#             */
-/*   Updated: 2024/04/27 17:42:16 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/07 15:02:49 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	mlx_idle_effects(t_data *data, int count)
 	static int	index = I1;
 
 	(TRUE) && (px = data->pos_x * DM, py = data->pos_y * DM);
-	if (count % 25 == 0 && index <= I8)
+	if (count % 10 == 0 && index <= I8)
 	{
 		mlx_image_to_window(data->mlx, data->img[GR], px, py);
 		mlx_image_to_window(data->mlx, data->img[index++], px, py);
@@ -48,7 +48,7 @@ static void	mlx_fire_effects(t_data *data, t_map *map, int count)
 	int			y;
 	static int	index = F1;
 
-	if (count % 25 == 0 && index <= F8)
+	if (count % 10 == 0 && index <= F8)
 	{
 		y = -1;
 		while (map->map[++y])

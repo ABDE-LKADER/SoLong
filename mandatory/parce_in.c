@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/07 11:28:39 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/07 14:04:42 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,13 @@ static void	mlx_map_init(t_data *data, t_map *map, int fd)
 	index = 0;
 	len = map->width + 1;
 	line = get_next_line(fd);
-	map->map = allocate(&data->leak, map->height, sizeof(char **));
-	map->flood = allocate(&data->leak, map->height, sizeof(char **));
+	map->map = malloc((map->height + 1) * sizeof(char **));
+	map->flood = malloc((map->height + 1) * sizeof(char **));
 	while (line)
 	{
-		map->map[index] = allocate(&data->leak, len, sizeof(char *));
-		map->flood[index] = allocate(&data->leak, len, sizeof(char *));
+		ft_printf(" %s", line);
+		map->map[index] = malloc(len * sizeof(char *));
+		map->flood[index] = malloc(len * sizeof(char *));
 		ft_strlcpy(map->map[index], line, len);
 		ft_strlcpy(map->flood[index], line, len);
 		free(line);
