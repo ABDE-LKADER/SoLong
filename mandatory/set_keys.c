@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 10:46:19 by abadouab          #+#    #+#             */
-/*   Updated: 2024/04/27 17:43:39 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/07 12:06:49 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,16 @@ void	exit_game(t_data *data, int move)
 
 void	flood_fill(char **map, int pos_x, int pos_y)
 {
+	if (map[pos_y][pos_x] == 'E')
+		map[pos_y][pos_x] = '1';
 	if (map[pos_y][pos_x] == '1'
 		|| map[pos_y][pos_x] == 'X')
 		return ;
-	if (map[pos_y][pos_x] == 'E')
-		map[pos_y][pos_x] = '1';
-	if (map[pos_y][pos_x] != '1')
-	{
-		map[pos_y][pos_x] = 'X';
-		flood_fill(map, pos_x + 1, pos_y);
-		flood_fill(map, pos_x - 1, pos_y);
-		flood_fill(map, pos_x, pos_y + 1);
-		flood_fill(map, pos_x, pos_y - 1);
-	}
+	map[pos_y][pos_x] = 'X';
+	flood_fill(map, pos_x + 1, pos_y);
+	flood_fill(map, pos_x - 1, pos_y);
+	flood_fill(map, pos_x, pos_y + 1);
+	flood_fill(map, pos_x, pos_y - 1);
 }
 
 int	checker_set(char **map, char set)

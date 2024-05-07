@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/04/27 17:44:07 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/07 11:07:23 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,6 @@ void	*allocate(t_allocate **collec, size_t count, size_t size);
 # define SPACE4 "textures/SPACE4.png"
 # define GROUND "textures/GROUND.png"
 # define PLAYER "textures/PLAYER.png"
-# define BANNER "textures/BANNER.png"
 
 ///////////////// SO_LONG STRUCTS /////////////////
 
@@ -170,7 +169,6 @@ typedef struct s_data
 	int				pos_y;
 	int				exit_x;
 	int				exit_y;
-	int				count;
 	t_allocate		*leak;
 	mlx_image_t		*img[FN];
 }					t_data;

@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 15:37:35 by abadouab          #+#    #+#             */
-/*   Updated: 2024/04/27 16:08:50 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/07 11:08:45 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,20 @@
 
 void	init_data(t_data *data)
 {
+	data->map.unwanted = 0;
+	data->map.player = 0;
 	data->leak = NULL;
+	data->exit_y = 0;
+	data->pos_x = 0;
+	data->pos_x = 0;
 	data->set = 0;
 	data->steps = 0;
-	data->count = 0;
-	data->pos_x = 0;
-	data->pos_x = 0;
 	data->exit_x = 0;
-	data->exit_y = 0;
+	data->map.len = 0;
+	data->map.exit = 0;
+	data->map.width = 0;
+	data->map.height = 0;
+	data->map.collect = 0;
 }
 
 void	cleaning(t_allocate **leak, t_data *data)

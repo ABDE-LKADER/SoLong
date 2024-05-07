@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/04/27 16:23:43 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/07 11:28:39 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ static int	mlx_check_map(t_data *data, t_map *map, char *line, char *next)
 	while (line && line[index] && line[index] != '\n')
 	{
 		(line[index] == 'E') && (map->exit++, data->exit_x = index,
-			data->exit_y = data->count);
+			data->exit_y = map->height - 1);
 		(line[index] == 'P') && (map->player++, data->pos_x = index,
-			data->pos_y = data->count);
+			data->pos_y = map->height - 1);
 		(line[index] == 'C') && (map->collect++);
 		(line[index] != '1' && !next) && (map->unwanted = 1);
 		(!ft_strchr("01EPC", line[index])) && (map->unwanted = 1);
@@ -92,11 +92,10 @@ static void	mlx_map_resolution(t_data *data, t_map *map, int fd)
 		mlx_message_error(3);
 	map->len = ft_strlen(line);
 	(ft_strchr(line, '\n')) && (map->len--);
-	(1) && (one = 0, map->exit = 0, map->player = 0, map->collect = 0,
-		map->unwanted = 0, map->height = 0, map->width = map->len);
+	(1) && (one = 0, map->width = map->len);
 	while (line)
 	{
-		(one) && (line = next, data->count++);
+		(one) && (line = next);
 		next = get_next_line(fd);
 		if ((!line && map->height <= 2) || map->unwanted)
 		{
