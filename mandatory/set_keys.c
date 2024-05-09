@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 10:46:19 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/07 12:06:49 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/09 17:18:50 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,12 @@
 
 void	exit_game(t_data *data, int move)
 {
-	if (move != MLX_KEY_ESCAPE)
-		moving(data, move);
+	cleaning(&data->leak, data);
+	exit(EXIT_SUCCESS);
+}
+
+int	mlx_destroy_notify(t_data *data)
+{
 	cleaning(&data->leak, data);
 	exit(EXIT_SUCCESS);
 }
@@ -52,15 +56,14 @@ int	checker_set(char **map, char set)
 	return (0);
 }
 
-int	map_status(t_map map, mlx_key_data_t key)
+int	map_status(t_map map, int key)
 {
 	if (checker_set(map.map, 'C'))
 		return (1);
-	if (key.action != MLX_RELEASE
-		&& ((ft_strchr("E", map.up) && key.key == MLX_KEY_UP)
-			|| (ft_strchr("E", map.down) && key.key == MLX_KEY_DOWN)
-			|| (ft_strchr("E", map.left) && key.key == MLX_KEY_LEFT)
-			|| (ft_strchr("E", map.right) && key.key == MLX_KEY_RIGHT)))
+	if ((ft_strchr("E", map.up) && key == KEY_UP)
+		|| (ft_strchr("E", map.down) && key == KEY_DOWN)
+		|| (ft_strchr("E", map.left) && key == KEY_LEFT)
+		|| (ft_strchr("E", map.right) && key == KEY_RIGHT))
 		return (0);
 	return (1);
 }

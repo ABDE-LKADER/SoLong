@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/07 11:07:23 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/09 17:18:47 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "mylib.h"
 # include <fcntl.h>
-# include <MLX42.h>
+# include <mlx.h>
 
 ///////////////// HEAP_CLEANER /////////////////
 
@@ -41,104 +41,96 @@ void	*allocate(t_allocate **collec, size_t count, size_t size);
 # define FALSE 0
 # define DM 60
 
-# define GR 0
-# define PL 1
-# define E1 2
-# define E2 3
-# define E3 4
-# define E4 5
-# define E5 6
-# define E6 7
-# define E7 8
-# define E8 9
-# define F1 10
-# define F2 11
-# define F3 12
-# define F4 13
-# define F5 14
-# define F6 15
-# define F7 16
-# define F8 17
-# define W1 18
-# define W2 19
-# define W3 20
-# define W4 21
-# define W5 22
-# define W6 23
-# define W7 24
-# define W8 25
-# define S1 26
-# define S2 27
-# define S3 28
-# define S4 29
-# define A1 30
-# define A2 31
-# define I1 32
-# define I2 33
-# define I3 34
-# define I4 35
-# define I5 36
-# define I6 37
-# define I7 38
-# define I8 39
-# define R1 40
-# define R2 41
-# define R3 42
-# define R4 43
-# define R5 44
-# define R6 45
-# define R7 46
-# define R8 47
-# define FN 48
+# define KEY_ESCAPE 53
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
+# define KEY_DOWN 125
+# define KEY_UP 126
 
-# define EXIT1 "textures/EXIT1.png"
-# define EXIT2 "textures/EXIT2.png"
-# define EXIT3 "textures/EXIT3.png"
-# define EXIT4 "textures/EXIT4.png"
-# define EXIT5 "textures/EXIT5.png"
-# define EXIT6 "textures/EXIT6.png"
-# define EXIT7 "textures/EXIT7.png"
-# define EXIT8 "textures/EXIT8.png"
-# define FIRE1 "textures/FIRE1.png"
-# define FIRE2 "textures/FIRE2.png"
-# define FIRE3 "textures/FIRE3.png"
-# define FIRE4 "textures/FIRE4.png"
-# define FIRE5 "textures/FIRE5.png"
-# define FIRE6 "textures/FIRE6.png"
-# define FIRE7 "textures/FIRE7.png"
-# define FIRE8 "textures/FIRE8.png"
-# define WALL1 "textures/WALL1.png"
-# define WALL2 "textures/WALL2.png"
-# define WALL3 "textures/WALL3.png"
-# define WALL4 "textures/WALL4.png"
-# define WALL5 "textures/WALL5.png"
-# define WALL6 "textures/WALL6.png"
-# define WALL7 "textures/WALL7.png"
-# define WALL8 "textures/WALL8.png"
-# define FALL1 "textures/FALL1.png"
-# define FALL2 "textures/FALL2.png"
-# define IDLE1 "textures/IDLE1.png"
-# define IDLE2 "textures/IDLE2.png"
-# define IDLE3 "textures/IDLE3.png"
-# define IDLE4 "textures/IDLE4.png"
-# define IDLE5 "textures/IDLE5.png"
-# define IDLE6 "textures/IDLE6.png"
-# define IDLE7 "textures/IDLE7.png"
-# define IDLE8 "textures/IDLE8.png"
-# define RIGHT1 "textures/RIGHT1.png"
-# define RIGHT2 "textures/RIGHT2.png"
-# define RIGHT3 "textures/RIGHT3.png"
-# define RIGHT4 "textures/RIGHT4.png"
-# define RIGHT5 "textures/RIGHT5.png"
-# define RIGHT6 "textures/RIGHT6.png"
-# define RIGHT7 "textures/RIGHT7.png"
-# define RIGHT8 "textures/RIGHT8.png"
-# define SPACE1 "textures/SPACE1.png"
-# define SPACE2 "textures/SPACE2.png"
-# define SPACE3 "textures/SPACE3.png"
-# define SPACE4 "textures/SPACE4.png"
-# define GROUND "textures/GROUND.png"
-# define PLAYER "textures/PLAYER.png"
+# define E1 0
+# define E2 1
+# define E3 2
+# define E4 3
+# define E5 4
+# define E6 5
+# define E7 6
+# define E8 7
+# define F1 8
+# define F2 9
+# define F3 10
+# define F4 11
+# define F5 12
+# define F6 13
+# define F7 14
+# define F8 15
+# define A1 16
+# define A2 17
+# define I1 18
+# define I2 19
+# define I3 20
+# define I4 21
+# define I5 22
+# define I6 23
+# define I7 24
+# define I8 25
+# define R1 26
+# define R2 27
+# define R3 28
+# define R4 29
+# define R5 30
+# define R6 31
+# define R7 32
+# define R8 33
+# define FN 34
+
+# define EXIT1 "textures/EXIT1.xpm"
+# define EXIT2 "textures/EXIT2.xpm"
+# define EXIT3 "textures/EXIT3.xpm"
+# define EXIT4 "textures/EXIT4.xpm"
+# define EXIT5 "textures/EXIT5.xpm"
+# define EXIT6 "textures/EXIT6.xpm"
+# define EXIT7 "textures/EXIT7.xpm"
+# define EXIT8 "textures/EXIT8.xpm"
+# define FIRE1 "textures/FIRE1.xpm"
+# define FIRE2 "textures/FIRE2.xpm"
+# define FIRE3 "textures/FIRE3.xpm"
+# define FIRE4 "textures/FIRE4.xpm"
+# define FIRE5 "textures/FIRE5.xpm"
+# define FIRE6 "textures/FIRE6.xpm"
+# define FIRE7 "textures/FIRE7.xpm"
+# define FIRE8 "textures/FIRE8.xpm"
+# define WALL1 "textures/WALL1.xpm"
+# define WALL2 "textures/WALL2.xpm"
+# define WALL3 "textures/WALL3.xpm"
+# define WALL4 "textures/WALL4.xpm"
+# define WALL5 "textures/WALL5.xpm"
+# define WALL6 "textures/WALL6.xpm"
+# define WALL7 "textures/WALL7.xpm"
+# define WALL8 "textures/WALL8.xpm"
+# define FALL1 "textures/FALL1.xpm"
+# define FALL2 "textures/FALL2.xpm"
+# define IDLE1 "textures/IDLE1.xpm"
+# define IDLE2 "textures/IDLE2.xpm"
+# define IDLE3 "textures/IDLE3.xpm"
+# define IDLE4 "textures/IDLE4.xpm"
+# define IDLE5 "textures/IDLE5.xpm"
+# define IDLE6 "textures/IDLE6.xpm"
+# define IDLE7 "textures/IDLE7.xpm"
+# define IDLE8 "textures/IDLE8.xpm"
+# define RIGHT1 "textures/RIGHT1.xpm"
+# define RIGHT2 "textures/RIGHT2.xpm"
+# define RIGHT3 "textures/RIGHT3.xpm"
+# define RIGHT4 "textures/RIGHT4.xpm"
+# define RIGHT5 "textures/RIGHT5.xpm"
+# define RIGHT6 "textures/RIGHT6.xpm"
+# define RIGHT7 "textures/RIGHT7.xpm"
+# define RIGHT8 "textures/RIGHT8.xpm"
+# define SPACE1 "textures/SPACE1.xpm"
+# define SPACE2 "textures/SPACE2.xpm"
+# define SPACE3 "textures/SPACE3.xpm"
+# define SPACE4 "textures/SPACE4.xpm"
+# define GROUND "textures/GROUND.xpm"
+# define PLAYER "textures/PLAYER.xpm"
 
 ///////////////// SO_LONG STRUCTS /////////////////
 
@@ -161,33 +153,46 @@ typedef struct s_map
 
 typedef struct s_data
 {
-	mlx_t			*mlx;
+	void			*mlx;
+	void			*win;
 	t_map			map;
+	int				width;
+	int				height;
 	int				set;
+	int				up;
+	int				down;
+	int				left;
+	int				right;
 	int				steps;
 	int				pos_x;
 	int				pos_y;
 	int				exit_x;
 	int				exit_y;
+	void			*img[FN];
 	t_allocate		*leak;
-	mlx_image_t		*img[FN];
 }					t_data;
 
 ///////////////// SO_LONG PROTOTYPES /////////////////
 
+void	mlx_move_up(t_data *data);
+void	mlx_move_down(t_data *data);
+void	mlx_move_left(t_data *data);
+void	mlx_move_right(t_data *data);
+
 void	init_data(t_data *data);
 void	mlx_init_img(t_data *data);
 void	mlx_message_error(int set);
-void	mlx_do_effects(void *param);
+int		mlx_do_effects(void *param);
 void	mlx_draw_string(t_data *data);
+int		map_status(t_map map, int key);
+int		mlx_destroy_notify(t_data *data);
 int		checker_set(char **map, char set);
 void	exit_game(t_data *data, int move);
-void	moving(t_data *data, int direction);
+int		mlx_move_player(int key, void *param);
 void	cleaning(t_allocate **leak, t_data *data);
-int		map_status(t_map map, mlx_key_data_t key);
 void	flood_fill(char **map, int pos_x, int pos_y);
+void	set_wall(t_data *data, void **img, int x, int y);
 void	mlx_parce_input(int ac, char **av, t_data *data);
-void	mlx_move_player(mlx_key_data_t key, void *param);
-void	set_wall(t_data *data, mlx_image_t **img, int x, int y);
+void	mlx_put_img(t_data *data, char *path, int x, int y);
 
 #endif
