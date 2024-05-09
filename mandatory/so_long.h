@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/09 17:18:47 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/09 21:04:15 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,11 +173,6 @@ typedef struct s_data
 }					t_data;
 
 ///////////////// SO_LONG PROTOTYPES /////////////////
-
-void	mlx_move_up(t_data *data);
-void	mlx_move_down(t_data *data);
-void	mlx_move_left(t_data *data);
-void	mlx_move_right(t_data *data);
 
 void	init_data(t_data *data);
 void	mlx_init_img(t_data *data);

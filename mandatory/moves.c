@@ -6,13 +6,13 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:13:26 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/09 16:55:42 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/09 21:31:07 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	mlx_move_up(t_data *data)
+static void	mlx_move_up(t_data *data)
 {
 	int		px;
 	int		py;
@@ -40,7 +40,7 @@ void	mlx_move_up(t_data *data)
 	}
 }
 
-void	mlx_move_down(t_data *data)
+static void	mlx_move_down(t_data *data)
 {
 	int		px;
 	int		py;
@@ -68,7 +68,7 @@ void	mlx_move_down(t_data *data)
 	}
 }
 
-void	mlx_move_left(t_data *data)
+static void	mlx_move_left(t_data *data)
 {
 	int		px;
 	int		py;
@@ -96,7 +96,7 @@ void	mlx_move_left(t_data *data)
 	}
 }
 
-void	mlx_move_right(t_data *data)
+static void	mlx_move_right(t_data *data)
 {
 	int		px;
 	int		py;
@@ -141,10 +141,10 @@ int	mlx_move_player(int key, void *param)
 		mlx_move_up(data);
 	else if (key == KEY_DOWN && !ft_strchr("1E", data->map.down))
 		mlx_move_down(data);
-	else if (key == KEY_RIGHT && !ft_strchr("1E", data->map.right))
-		mlx_move_right(data);
 	else if (key == KEY_LEFT && !ft_strchr("1E", data->map.left))
 		mlx_move_left(data);
+	else if (key == KEY_RIGHT && !ft_strchr("1E", data->map.right))
+		mlx_move_right(data);
 	if (!map_status(data->map, key))
 		exit_game(data, key);
 	return (TRUE);
