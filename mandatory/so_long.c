@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/10 17:06:51 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/10 22:10:17 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	mlx_put_img(t_data *data, char *path, int x, int y)
 	if (!img)
 		(cleaning(&data->leak, data), exit(EXIT_FAILURE));
 	mlx_put_image_to_window(data->mlx, data->win, img, x, y);
+	mlx_destroy_image(data->mlx, img);
 }
 
 static void	mlx_game_render(t_data *data)
