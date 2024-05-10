@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:54:07 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/10 11:23:49 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/10 14:59:08 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ static void	mlx_idle_effects(t_data *data, int count)
 	static int	index = I1;
 
 	(TRUE) && (px = data->pos_x * DM, py = data->pos_y * DM);
-	if (count % 1000 == 0 && index <= I8 && !data->right && !data->up
-		&& !data->left && !data->down)
+	if (count % 1000 == 0 && index <= I8)
 	{
 		mlx_put_img(data, GROUND, px, py);
 		mlx_put_image_to_window(data->mlx, data->win, data->img[index++], px, py);

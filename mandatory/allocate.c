@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 15:37:35 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/09 14:24:50 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/10 14:58:41 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,6 @@ void	init_data(t_data *data)
 	data->exit_y = 0;
 	data->pos_x = 0;
 	data->pos_x = 0;
-	data->down = 0;
-	data->set = 0;
-	data->up = 0;
-	data->left = 0;
-	data->right = 0;
 	data->steps = 0;
 	data->exit_x = 0;
 	data->map.len = 0;

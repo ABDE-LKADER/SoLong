@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/09 21:04:15 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/10 14:58:20 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,11 +158,6 @@ typedef struct s_data
 	t_map			map;
 	int				width;
 	int				height;
-	int				set;
-	int				up;
-	int				down;
-	int				left;
-	int				right;
 	int				steps;
 	int				pos_x;
 	int				pos_y;
