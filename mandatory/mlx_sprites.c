@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:54:07 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/10 14:59:08 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/10 17:05:52 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static void	mlx_idle_effects(t_data *data, int count)
 	{
 		mlx_put_img(data, GROUND, px, py);
 		mlx_put_image_to_window(data->mlx, data->win, data->img[index++], px, py);
-		mlx_do_sync(data->mlx);
 		(index == I8) && (index = I1);
 	}
 }

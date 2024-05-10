@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:13:26 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/10 11:16:48 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/10 17:06:25 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,8 +135,8 @@ int	mlx_move_player(int key, void *param)
 	map = &data->map;
 	map->up = map->map[data->pos_y - 1][data->pos_x];
 	map->down = map->map[data->pos_y + 1][data->pos_x];
-	map->right = map->map[data->pos_y][data->pos_x + 1];
 	map->left = map->map[data->pos_y][data->pos_x - 1];
+	map->right = map->map[data->pos_y][data->pos_x + 1];
 	if (key == KEY_ESCAPE)
 		exit_game(data, key);
 	if (key == KEY_UP && !ft_strchr("1E", data->map.up))
