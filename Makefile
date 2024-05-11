@@ -6,20 +6,25 @@
 #    By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/19 17:23:22 by abadouab          #+#    #+#              #
-#    Updated: 2024/05/09 10:41:17 by abadouab         ###   ########.fr        #
+#    Updated: 2024/05/11 12:57:35 by abadouab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	so_long
 
-SRCS		=	mandatory/moves.c   \
-				mandatory/so_long.c  \
-				mandatory/parce_in.c  \
-				mandatory/set_keys.c   \
-				mandatory/allocate.c    \
-				mandatory/load_img.c     \
+SRCS		=	mandatory/so_long.c  \
+				mandatory/allocate.c  \
+				mandatory/mlx_plus.c   \
+				mandatory/mlx_parce.c   \
+				mandatory/mlx_tools.c    \
 				mandatory/mlx_space.c     \
-				mandatory/mlx_sprites.c
+				mandatory/moving_up.c      \
+				mandatory/moving_down.c     \
+				mandatory/moving_left.c      \
+				mandatory/moving_right.c      \
+				mandatory/exit_sprites.c       \
+				mandatory/fire_sprites.c        \
+				mandatory/idle_sprites.c
 
 OBJS		=	$(SRCS:.c=.o)
 HEADER		=	mandatory/so_long.h
@@ -28,7 +33,7 @@ MYLB		=	MYLIB
 MYAR		=	MYLIB/libar.a
 MLX			=	mlx
 
-FLAGS		=	cc
+FLAGS		=	cc -Wall -Wextra
 RM			=	rm -fr
 
 GREEN		=	"\033[1;32m"

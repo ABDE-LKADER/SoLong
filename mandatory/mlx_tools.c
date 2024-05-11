@@ -1,28 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_keys.c                                         :+:      :+:    :+:   */
+/*   mlx_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 10:46:19 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/09 17:54:44 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/11 13:04:29 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	exit_game(t_data *data, int move)
-{
-	cleaning(&data->leak, data);
-	exit(EXIT_SUCCESS);
-}
-
-int	mlx_destroy_notify(t_data *data)
-{
-	cleaning(&data->leak, data);
-	exit(EXIT_SUCCESS);
-}
 
 void	flood_fill(char **map, int pos_x, int pos_y)
 {
@@ -36,6 +24,23 @@ void	flood_fill(char **map, int pos_x, int pos_y)
 	flood_fill(map, pos_x - 1, pos_y);
 	flood_fill(map, pos_x, pos_y + 1);
 	flood_fill(map, pos_x, pos_y - 1);
+}
+
+void	mlx_sync_frame(t_data *data, int key)
+{
+	if (key == KEY_UP)
+		--data->pos_y;
+	if (key == KEY_DOWN)
+		++data->pos_y;
+	if (key == KEY_LEFT)
+		--data->pos_x;
+	if (key == KEY_RIGHT)
+		++data->pos_x;
+	if (data->map.map[data->pos_y][data->pos_x] == 'C')
+		data->map.collect--;
+	data->map.map[data->pos_y][data->pos_x] = 'P';
+	ft_printf(GRN"moves: %d\n"RST, data->steps++);
+	mlx_draw_string(data);
 }
 
 int	checker_set(char **map, char set)

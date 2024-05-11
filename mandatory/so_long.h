@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/10 17:06:05 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/11 13:06:30 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,42 +46,6 @@ void	*allocate(t_allocate **collec, size_t count, size_t size);
 # define KEY_RIGHT 124
 # define KEY_DOWN 125
 # define KEY_UP 126
-
-# define E1 0
-# define E2 1
-# define E3 2
-# define E4 3
-# define E5 4
-# define E6 5
-# define E7 6
-# define E8 7
-# define F1 8
-# define F2 9
-# define F3 10
-# define F4 11
-# define F5 12
-# define F6 13
-# define F7 14
-# define F8 15
-# define A1 16
-# define A2 17
-# define I1 18
-# define I2 19
-# define I3 20
-# define I4 21
-# define I5 22
-# define I6 23
-# define I7 24
-# define I8 25
-# define R1 26
-# define R2 27
-# define R3 28
-# define R4 29
-# define R5 30
-# define R6 31
-# define R7 32
-# define R8 33
-# define FN 34
 
 # define EXIT1 "textures/EXIT1.xpm"
 # define EXIT2 "textures/EXIT2.xpm"
@@ -163,26 +127,31 @@ typedef struct s_data
 	int				pos_y;
 	int				exit_x;
 	int				exit_y;
-	void			*img[FN];
 	t_allocate		*leak;
 }					t_data;
 
 ///////////////// SO_LONG PROTOTYPES /////////////////
 
+void	exit_game(t_data *data);
 void	init_data(t_data *data);
-void	mlx_init_img(t_data *data);
 void	mlx_message_error(int set);
-int		mlx_do_effects(void *param);
 void	mlx_draw_string(t_data *data);
 int		map_status(t_map map, int key);
 int		mlx_destroy_notify(t_data *data);
 int		checker_set(char **map, char set);
-void	exit_game(t_data *data, int move);
+void	mlx_move_up(t_data *data, int key);
+void	set_wall(t_data *data, int x, int y);
+void	mlx_move_down(t_data *data, int key);
+// void	mlx_move_left(t_data *data, int key);
+// void	mlx_move_right(t_data *data, int key);
+void	mlx_sync_frame(t_data *data, int key);
 int		mlx_move_player(int key, void *param);
 void	cleaning(t_allocate **leak, t_data *data);
+void	mlx_idle_effects(t_data *data, int count);
+void	mlx_exit_effects(t_data *data, int count);
 void	flood_fill(char **map, int pos_x, int pos_y);
-void	set_wall(t_data *data, void **img, int x, int y);
 void	mlx_parce_input(int ac, char **av, t_data *data);
 void	mlx_put_img(t_data *data, char *path, int x, int y);
+void	mlx_fire_effects(t_data *data, t_map *map, int count);
 
 #endif

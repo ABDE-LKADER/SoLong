@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:54:07 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/09 17:19:26 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/11 12:38:21 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	mlx_draw_string(t_data *data)
 	(free(steps), free(collect));
 }
 
-static void	set_wall_plus(t_data *data, void **img, int x, int y)
+static void	set_wall_plus(t_data *data, int x, int y)
 {
 	int		px;
 	int		py;
@@ -53,7 +53,7 @@ static void	set_wall_plus(t_data *data, void **img, int x, int y)
 	}
 }
 
-void	set_wall(t_data *data, void **img, int x, int y)
+void	set_wall(t_data *data, int x, int y)
 {
 	int		px;
 	int		py;
@@ -74,5 +74,5 @@ void	set_wall(t_data *data, void **img, int x, int y)
 	else if (x && data->map.width - 1 != x && data->map.height - 1 == y)
 		mlx_put_img(data, WALL7, px, py);
 	else
-		set_wall_plus(data, img, x, y);
+		set_wall_plus(data, x, y);
 }
