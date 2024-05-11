@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/11 13:06:30 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/11 15:02:22 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ void	mlx_move_up(t_data *data, int key);
 void	set_wall(t_data *data, int x, int y);
 void	mlx_move_down(t_data *data, int key);
 // void	mlx_move_left(t_data *data, int key);
-// void	mlx_move_right(t_data *data, int key);
+void	mlx_move_right(t_data *data, int key);
 void	mlx_sync_frame(t_data *data, int key);
 int		mlx_move_player(int key, void *param);
 void	cleaning(t_allocate **leak, t_data *data);

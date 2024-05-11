@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:13:26 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/11 13:04:49 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/11 15:03:53 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void	moving_up(t_data *data, int set, int x, int y)
 	if (!img)
 		(cleaning(&data->leak, data), exit(EXIT_FAILURE));
 	mlx_put_image_to_window(data->mlx, data->win, img, x, y);
+	mlx_do_sync(data->mlx);
 	mlx_destroy_image(data->mlx, img);
 }
 

@@ -1,12 +1,9 @@
 {
     "files.associations": {
-        "chrono": "c",
-        "so_long.h": "c",
-        "algorithm": "c",
         "__bit_reference": "c",
-        "__string": "c",
-        "ios": "c",
-        "string": "c",
-        "type_traits": "c"
+        "algorithm": "c",
+        "bitset": "c",
+        "chrono": "c",
+        "unordered_map": "c"
     }
 }
