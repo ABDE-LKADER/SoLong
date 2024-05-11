@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 17:45:48 by abadouab          #+#    #+#             */
-/*   Updated: 2024/04/27 14:19:55 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/11 20:35:29 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,18 @@ char	*get_next_line(int fd);
 size_t	strlen_set(char *s, char set);
 char	*strdup_set(char *str, char set);
 char	*str_join(char *save, char *load);
+
+///////////////// HEAP_CLEANER /////////////////
+
+# define TRUE 1
+
+typedef struct s_allocate
+{
+	void				*block;
+	struct s_allocate	*next;
+}						t_allocate;
+
+void	cleanup(t_allocate **collec);
+void	*allocate(t_allocate **collec, size_t count, size_t size);
 
 #endif

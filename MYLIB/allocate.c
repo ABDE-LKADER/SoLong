@@ -6,21 +6,11 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 15:37:35 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/11 13:03:59 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/11 20:35:34 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
-
-void	cleaning(t_allocate **leak, t_data *data)
-{
-	if (data->mlx && data->win)
-	{
-		mlx_clear_window(data->mlx, data->win);
-		mlx_destroy_window(data->mlx, data->win);
-	}
-	cleanup(leak);
-}
+#include "mylib.h"
 
 void	*allocate(t_allocate **collec, size_t count, size_t size)
 {
