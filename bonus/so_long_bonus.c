@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   so_long_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/11 20:34:24 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/11 21:29:49 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	mlx_put_img(t_data *data, char *path, int x, int y)
 {
@@ -93,12 +93,10 @@ static void	mlx_game_render(t_data *data)
 	mlx_draw_string(data);
 }
 
-void lk(void){system("leaks so_long");}
 int	main(int ac, char **av)
 {
 	t_data	data;
 
-	atexit(lk);
 	mlx_parce_input(ac, av, &data);
 	data.mlx = mlx_init();
 	if (!data.mlx)

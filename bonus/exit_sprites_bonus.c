@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   idle_sprites.c                                     :+:      :+:    :+:   */
+/*   exit_sprites_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:54:07 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/11 20:26:17 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/11 21:28:15 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
-static void	mlx_put_idle(t_data *data, int set, int x, int y)
+static void	mlx_put_exit(t_data *data, int set, int x, int y)
 {
 	void	*img;
 	char	*path;
 
-	(set == 1) && (path = IDLE1);
-	(set == 2) && (path = IDLE2);
-	(set == 3) && (path = IDLE3);
-	(set == 4) && (path = IDLE4);
-	(set == 5) && (path = IDLE5);
-	(set == 6) && (path = IDLE6);
-	(set == 7) && (path = IDLE7);
-	(set == 8) && (path = IDLE8);
+	(set == 1) && (path = EXIT1);
+	(set == 2) && (path = EXIT2);
+	(set == 3) && (path = EXIT3);
+	(set == 4) && (path = EXIT4);
+	(set == 5) && (path = EXIT5);
+	(set == 6) && (path = EXIT6);
+	(set == 7) && (path = EXIT7);
 	img = mlx_xpm_file_to_image(data->mlx, path, &data->height, &data->width);
 	if (!img)
 		(cleaning(&data->leak, data), exit(EXIT_FAILURE));
@@ -32,17 +31,18 @@ static void	mlx_put_idle(t_data *data, int set, int x, int y)
 	mlx_destroy_image(data->mlx, img);
 }
 
-void	mlx_idle_effects(t_data *data, int count)
+void	mlx_exit_effects(t_data *data, int count)
 {
 	int			px;
 	int			py;
-	static int	set;
+	static int	index = 1;
 
-	(TRUE) && (px = data->pos_x * DM, py = data->pos_y * DM);
-	if (!(count % 800) && ++set <= 8)
+	(TRUE) && (px = data->exit_x * DM, py = data->exit_y * DM);
+	if (!(count % 800) && index < 8 && !data->map.collect)
 	{
 		mlx_put_img(data, GROUND, px, py);
-		mlx_put_idle(data, set, px, py);
-		(set == 8) && (set = 0);
+		mlx_put_img(data, EXIT8, px, py);
+		mlx_put_exit(data, index++, px, py);
+		mlx_do_sync(data->mlx);
 	}
 }

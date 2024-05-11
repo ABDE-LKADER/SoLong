@@ -1,50 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   moving_up.c                                        :+:      :+:    :+:   */
+/*   idle_sprites_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/11 15:13:26 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/11 19:56:32 by abadouab         ###   ########.fr       */
+/*   Created: 2024/03/24 15:54:07 by abadouab          #+#    #+#             */
+/*   Updated: 2024/05/11 21:28:09 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
-static void	moving_up(t_data *data, int set, int x, int y)
+static void	mlx_put_idle(t_data *data, int set, int x, int y)
 {
 	void	*img;
 	char	*path;
 
-	(set == 1) && (path = FALL1);
-	(set == 2) && (path = FALL2);
+	(set == 1) && (path = IDLE1);
+	(set == 2) && (path = IDLE2);
+	(set == 3) && (path = IDLE3);
+	(set == 4) && (path = IDLE4);
+	(set == 5) && (path = IDLE5);
+	(set == 6) && (path = IDLE6);
+	(set == 7) && (path = IDLE7);
+	(set == 8) && (path = IDLE8);
 	img = mlx_xpm_file_to_image(data->mlx, path, &data->height, &data->width);
 	if (!img)
 		(cleaning(&data->leak, data), exit(EXIT_FAILURE));
 	mlx_put_image_to_window(data->mlx, data->win, img, x, y);
-	mlx_do_sync(data->mlx);
 	mlx_destroy_image(data->mlx, img);
 }
 
-void	mlx_move_up(t_data *data, int key)
+void	mlx_idle_effects(t_data *data, int count)
 {
-	int		px;
-	int		py;
-	int		move;
-	int		set;
+	int			px;
+	int			py;
+	static int	set;
 
-	(TRUE) && (move = 7, set = 0);
 	(TRUE) && (px = data->pos_x * DM, py = data->pos_y * DM);
-	while (move <= 49)
+	if (!(count % 800) && ++set <= 8)
 	{
 		mlx_put_img(data, GROUND, px, py);
-		mlx_put_img(data, GROUND, px, py - move);
-		moving_up(data, ++set, px, py - move);
-		(set == 2) && (set = 0);
-		mlx_do_sync(data->mlx);
-		if (move == 49)
-			mlx_sync_frame(data, key);
-		move += 7;
+		mlx_put_idle(data, set, px, py);
+		(set == 8) && (set = 0);
 	}
 }

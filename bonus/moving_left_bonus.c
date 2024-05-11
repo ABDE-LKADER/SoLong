@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   moving_right.c                                     :+:      :+:    :+:   */
+/*   moving_left_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:13:26 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/11 21:31:35 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/11 21:32:19 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
-static void	moving_right(t_data *data, int set, int x, int y)
+static void	moving_left(t_data *data, int set, int x, int y)
 {
 	void	*img;
 	char	*path;
@@ -33,7 +33,7 @@ static void	moving_right(t_data *data, int set, int x, int y)
 	mlx_destroy_image(data->mlx, img);
 }
 
-void	mlx_move_right(t_data *data, int key)
+void	mlx_move_left(t_data *data, int key)
 {
 	int		px;
 	int		py;
@@ -45,8 +45,8 @@ void	mlx_move_right(t_data *data, int key)
 	while (move <= 49)
 	{
 		mlx_put_img(data, GROUND, px, py);
-		mlx_put_img(data, GROUND, px + move, py);
-		moving_right(data, ++set, px + move, py);
+		mlx_put_img(data, GROUND, px - move, py);
+		moving_left(data, ++set, px - move, py);
 		mlx_do_sync(data->mlx);
 		if (move == 49)
 			mlx_sync_frame(data, key);

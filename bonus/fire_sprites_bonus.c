@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_sprites.c                                     :+:      :+:    :+:   */
+/*   fire_sprites_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:54:07 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/11 20:24:19 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/11 21:28:13 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
-static void	mlx_put_exit(t_data *data, int set, int x, int y)
+static void	mlx_put_fire(t_data *data, int set, int x, int y)
 {
 	void	*img;
 	char	*path;
 
-	(set == 1) && (path = EXIT1);
-	(set == 2) && (path = EXIT2);
-	(set == 3) && (path = EXIT3);
-	(set == 4) && (path = EXIT4);
-	(set == 5) && (path = EXIT5);
-	(set == 6) && (path = EXIT6);
-	(set == 7) && (path = EXIT7);
+	(set == 1) && (path = FIRE1);
+	(set == 2) && (path = FIRE2);
+	(set == 3) && (path = FIRE3);
+	(set == 4) && (path = FIRE4);
+	(set == 5) && (path = FIRE5);
+	(set == 6) && (path = FIRE6);
+	(set == 7) && (path = FIRE7);
+	(set == 8) && (path = FIRE8);
 	img = mlx_xpm_file_to_image(data->mlx, path, &data->height, &data->width);
 	if (!img)
 		(cleaning(&data->leak, data), exit(EXIT_FAILURE));
@@ -31,18 +32,27 @@ static void	mlx_put_exit(t_data *data, int set, int x, int y)
 	mlx_destroy_image(data->mlx, img);
 }
 
-void	mlx_exit_effects(t_data *data, int count)
+void	mlx_fire_effects(t_data *data, t_map *map, int count)
 {
-	int			px;
-	int			py;
-	static int	index = 1;
+	int			x;
+	int			y;
+	static int	set;
 
-	(TRUE) && (px = data->exit_x * DM, py = data->exit_y * DM);
-	if (!(count % 800) && index < 8 && !data->map.collect)
+	if (!(count % 899) && ++set <= 8)
 	{
-		mlx_put_img(data, GROUND, px, py);
-		mlx_put_img(data, EXIT8, px, py);
-		mlx_put_exit(data, index++, px, py);
-		mlx_do_sync(data->mlx);
+		y = -1;
+		while (map->map[++y])
+		{
+			x = -1;
+			while (map->map[y][++x])
+			{
+				if (map->map[y][x] == 'C')
+				{
+					mlx_put_img(data, GROUND, x * DM, y * DM);
+					mlx_put_fire(data, set, x * DM, y * DM);
+				}
+			}
+		}
 	}
+	(set == 8) && (set = 0);
 }
