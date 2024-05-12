@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/11 20:38:30 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/12 15:33:28 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@
 # define SPACE3 "textures/SPACE3.xpm"
 # define SPACE4 "textures/SPACE4.xpm"
 # define GROUND "textures/GROUND.xpm"
-# define PLAYER "textures/PLAYER.xpm"
 
 ///////////////// SO_LONG STRUCTS /////////////////
 
@@ -114,6 +113,7 @@ typedef struct s_data
 	int				width;
 	int				height;
 	int				steps;
+	int				collect;
 	int				pos_x;
 	int				pos_y;
 	int				exit_x;
@@ -123,11 +123,11 @@ typedef struct s_data
 
 ///////////////// SO_LONG PROTOTYPES /////////////////
 
-void	exit_game(t_data *data);
 void	init_data(t_data *data);
 void	mlx_message_error(int set);
 void	mlx_draw_string(t_data *data);
 int		map_status(t_map map, int key);
+void	exit_game(t_data *data, int key);
 int		mlx_destroy_notify(t_data *data);
 int		checker_set(char **map, char set);
 void	mlx_move_up(t_data *data, int key);

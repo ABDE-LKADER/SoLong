@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 10:46:19 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/11 14:53:36 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/12 15:48:00 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,12 @@ void	mlx_sync_frame(t_data *data, int key)
 	if (key == KEY_RIGHT)
 		++data->pos_x;
 	if (data->map.map[data->pos_y][data->pos_x] == 'C')
+		data->collect++;
+	mlx_draw_string(data);
+	if (data->map.map[data->pos_y][data->pos_x] == 'C')
 		data->map.collect--;
 	data->map.map[data->pos_y][data->pos_x] = 'P';
 	ft_printf(GRN"moves: %d\n"RST, data->steps++);
-	mlx_draw_string(data);
 }
 
 int	checker_set(char **map, char set)

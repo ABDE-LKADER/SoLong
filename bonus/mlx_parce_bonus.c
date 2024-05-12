@@ -6,26 +6,11 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/11 21:28:06 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/11 21:44:09 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
-
-void	mlx_message_error(int set)
-{
-	if (set == 0)
-		ft_putstr_fd(RED"Error:\n"YLW"Usage: "
-			RST"./so_long <filename.ber>\n", 2);
-	else if (set == 1)
-		ft_putstr_fd(RED"Error:\n"RST"Input must have "
-			YLW"\".ber\""RST" extension.\n", 2);
-	else if (set == 2)
-		ft_putstr_fd(RED"Error:\n"YLW"<file>"RST" not found.\n", 2);
-	else if (set == 3)
-		ft_putstr_fd(RED"Error:\n"RST"Invalid "YLW"<Map>"RST"\n", 2);
-	exit(EXIT_FAILURE);
-}
 
 static int	mlx_check_map(t_data *data, t_map *map, char *line, char *next)
 {
@@ -46,7 +31,7 @@ static int	mlx_check_map(t_data *data, t_map *map, char *line, char *next)
 			data->pos_y = map->height - 1);
 		(line[index] == 'C') && (map->collect++);
 		(line[index] != '1' && !next) && (map->unwanted = 1);
-		(!ft_strchr("01EPC", line[index])) && (map->unwanted = 1);
+		(!ft_strchr("01EPCN", line[index])) && (map->unwanted = 1);
 		(line[index] != '1' && map->height == 1) && (map->unwanted = 1);
 		index++;
 	}

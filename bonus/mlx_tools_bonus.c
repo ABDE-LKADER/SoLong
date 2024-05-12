@@ -6,11 +6,22 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 10:46:19 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/11 21:27:59 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/12 15:05:09 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
+
+void	mlx_put_img(t_data *data, char *path, int x, int y)
+{
+	void	*img;
+
+	img = mlx_xpm_file_to_image(data->mlx, path, &data->height, &data->width);
+	if (!img)
+		(cleaning(&data->leak, data), exit(EXIT_FAILURE));
+	mlx_put_image_to_window(data->mlx, data->win, img, x, y);
+	mlx_destroy_image(data->mlx, img);
+}
 
 void	flood_fill(char **map, int pos_x, int pos_y)
 {

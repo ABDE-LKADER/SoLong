@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:54:07 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/11 20:00:54 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/12 15:38:02 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,26 @@
 
 void	mlx_draw_string(t_data *data)
 {
-	char	*steps;
-	char	*collect;
+	char			*steps;
+	char			*collect;
 
 	steps = ft_itoa(data->steps);
-	collect = ft_itoa(data->map.collect);
-	mlx_put_img(data, WALL1, 0, 0);
-	mlx_put_img(data, WALL2, DM, 0);
 	mlx_put_img(data, WALL2, DM * 2, 0);
 	mlx_put_img(data, WALL2, DM * 3, 0);
 	mlx_put_img(data, WALL2, DM * 4, 0);
 	mlx_put_img(data, WALL2, DM * 5, 0);
-	mlx_string_put(data->mlx, data->win, 25, 6, 0x7A7A7A, "COLLECT: ");
-	mlx_string_put(data->mlx, data->win, 109, 6, 0x7A7A7A, collect);
 	mlx_string_put(data->mlx, data->win, 152, 6, 0x7A7A7A, "STEPS: ");
 	mlx_string_put(data->mlx, data->win, 215, 6, 0x7A7A7A, steps);
-	(free(steps), free(collect));
+	if (data->map.collect)
+	{
+		collect = ft_itoa(data->collect);
+		mlx_put_img(data, WALL1, 0, 0);
+		mlx_put_img(data, WALL2, DM, 0);
+		mlx_string_put(data->mlx, data->win, 25, 6, 0x7A7A7A, "COLLECT: ");
+		mlx_string_put(data->mlx, data->win, 109, 6, 0x7A7A7A, collect);
+		free(collect);
+	}
+	free(steps);
 }
 
 static void	set_wall_plus(t_data *data, int x, int y)

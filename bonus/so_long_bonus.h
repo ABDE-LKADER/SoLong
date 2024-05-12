@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/11 21:25:31 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/12 15:03:16 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@
 # define SPACE3 "textures/SPACE3.xpm"
 # define SPACE4 "textures/SPACE4.xpm"
 # define GROUND "textures/GROUND.xpm"
-# define PLAYER "textures/PLAYER.xpm"
+# define ENEMY1 "textures/ENEMY1.xpm"
 
 ///////////////// SO_LONG STRUCTS /////////////////
 
@@ -136,7 +136,6 @@ void	mlx_move_down(t_data *data, int key);
 void	mlx_move_left(t_data *data, int key);
 void	mlx_move_right(t_data *data, int key);
 void	mlx_sync_frame(t_data *data, int key);
-int		mlx_move_player(int key, void *param);
 void	cleaning(t_allocate **leak, t_data *data);
 void	mlx_idle_effects(t_data *data, int count);
 void	mlx_exit_effects(t_data *data, int count);

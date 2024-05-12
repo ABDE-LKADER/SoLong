@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 15:37:35 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/11 21:28:04 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/12 15:04:01 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,19 @@ void	cleaning(t_allocate **leak, t_data *data)
 		mlx_destroy_window(data->mlx, data->win);
 	}
 	cleanup(leak);
+}
+
+void	mlx_message_error(int set)
+{
+	if (set == 0)
+		ft_putstr_fd(RED"Error:\n"YLW"Usage: "
+			RST"./so_long <filename.ber>\n", 2);
+	else if (set == 1)
+		ft_putstr_fd(RED"Error:\n"RST"Input must have "
+			YLW"\".ber\""RST" extension.\n", 2);
+	else if (set == 2)
+		ft_putstr_fd(RED"Error:\n"YLW"<file>"RST" not found.\n", 2);
+	else if (set == 3)
+		ft_putstr_fd(RED"Error:\n"RST"Invalid "YLW"<Map>"RST"\n", 2);
+	exit(EXIT_FAILURE);
 }
