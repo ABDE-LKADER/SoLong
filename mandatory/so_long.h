@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/12 15:33:28 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/12 17:47:24 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@
 # define WALL8 "textures/WALL8.xpm"
 # define FALL1 "textures/FALL1.xpm"
 # define FALL2 "textures/FALL2.xpm"
+# define JUMP1 "textures/JUMP1.xpm"
+# define JUMP2 "textures/JUMP2.xpm"
 # define IDLE1 "textures/IDLE1.xpm"
 # define IDLE2 "textures/IDLE2.xpm"
 # define IDLE3 "textures/IDLE3.xpm"
@@ -72,6 +74,14 @@
 # define IDLE6 "textures/IDLE6.xpm"
 # define IDLE7 "textures/IDLE7.xpm"
 # define IDLE8 "textures/IDLE8.xpm"
+# define LEFT1 "textures/LEFT1.xpm"
+# define LEFT2 "textures/LEFT2.xpm"
+# define LEFT3 "textures/LEFT3.xpm"
+# define LEFT4 "textures/LEFT4.xpm"
+# define LEFT5 "textures/LEFT5.xpm"
+# define LEFT6 "textures/LEFT6.xpm"
+# define LEFT7 "textures/LEFT7.xpm"
+# define LEFT8 "textures/LEFT8.xpm"
 # define RIGHT1 "textures/RIGHT1.xpm"
 # define RIGHT2 "textures/RIGHT2.xpm"
 # define RIGHT3 "textures/RIGHT3.xpm"

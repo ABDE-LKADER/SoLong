@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:13:26 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/11 21:31:35 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/12 17:47:40 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	mlx_move_right(t_data *data, int key)
 	while (move <= 49)
 	{
 		mlx_put_img(data, GROUND, px, py);
-		mlx_put_img(data, GROUND, px + move, py);
 		moving_right(data, ++set, px + move, py);
 		mlx_do_sync(data->mlx);
 		if (move == 49)

@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:13:26 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/11 21:31:10 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/12 17:47:48 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ static void	moving_left(t_data *data, int set, int x, int y)
 	void	*img;
 	char	*path;
 
-	(set == 1) && (path = RIGHT1);
-	(set == 2) && (path = RIGHT2);
-	(set == 3) && (path = RIGHT3);
-	(set == 4) && (path = RIGHT4);
-	(set == 5) && (path = RIGHT5);
-	(set == 6) && (path = RIGHT6);
-	(set == 7) && (path = RIGHT7);
-	(set == 8) && (path = RIGHT8);
+	(set == 1) && (path = LEFT1);
+	(set == 2) && (path = LEFT2);
+	(set == 3) && (path = LEFT3);
+	(set == 4) && (path = LEFT4);
+	(set == 5) && (path = LEFT5);
+	(set == 6) && (path = LEFT6);
+	(set == 7) && (path = LEFT7);
+	(set == 8) && (path = LEFT8);
 	img = mlx_xpm_file_to_image(data->mlx, path, &data->height, &data->width);
 	if (!img)
 		(cleaning(&data->leak, data), exit(EXIT_FAILURE));
@@ -45,7 +45,6 @@ void	mlx_move_left(t_data *data, int key)
 	while (move <= 49)
 	{
 		mlx_put_img(data, GROUND, px, py);
-		mlx_put_img(data, GROUND, px - move, py);
 		moving_left(data, ++set, px - move, py);
 		mlx_do_sync(data->mlx);
 		if (move == 49)
