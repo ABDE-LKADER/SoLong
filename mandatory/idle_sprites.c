@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:54:07 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/11 20:26:17 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/14 16:45:54 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	mlx_put_idle(t_data *data, int set, int x, int y)
 	(set == 8) && (path = IDLE8);
 	img = mlx_xpm_file_to_image(data->mlx, path, &data->height, &data->width);
 	if (!img)
-		(cleaning(&data->leak, data), exit(EXIT_FAILURE));
+		(cleaning(&data->leak, data), mlx_message_error(4, path));
 	mlx_put_image_to_window(data->mlx, data->win, img, x, y);
 	mlx_destroy_image(data->mlx, img);
 }

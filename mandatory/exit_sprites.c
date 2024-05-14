@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:54:07 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/11 20:24:19 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/14 16:45:46 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	mlx_put_exit(t_data *data, int set, int x, int y)
 	(set == 7) && (path = EXIT7);
 	img = mlx_xpm_file_to_image(data->mlx, path, &data->height, &data->width);
 	if (!img)
-		(cleaning(&data->leak, data), exit(EXIT_FAILURE));
+		(cleaning(&data->leak, data), mlx_message_error(4, path));
 	mlx_put_image_to_window(data->mlx, data->win, img, x, y);
 	mlx_destroy_image(data->mlx, img);
 }
@@ -43,6 +43,5 @@ void	mlx_exit_effects(t_data *data, int count)
 		mlx_put_img(data, GROUND, px, py);
 		mlx_put_img(data, EXIT8, px, py);
 		mlx_put_exit(data, index++, px, py);
-		mlx_do_sync(data->mlx);
 	}
 }

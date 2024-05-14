@@ -6,7 +6,7 @@
 #    By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/19 17:23:22 by abadouab          #+#    #+#              #
-#    Updated: 2024/05/11 21:29:26 by abadouab         ###   ########.fr        #
+#    Updated: 2024/05/14 18:51:53 by abadouab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,12 @@ SRCS				=	mandatory/so_long.c  \
 						mandatory/mlx_tools.c   \
 						mandatory/mlx_space.c    \
 						mandatory/moving_up.c     \
-						mandatory/moving_down.c    \
-						mandatory/moving_left.c     \
-						mandatory/moving_right.c     \
-						mandatory/exit_sprites.c      \
-						mandatory/fire_sprites.c       \
+						mandatory/mlx_checker.c    \
+						mandatory/moving_down.c     \
+						mandatory/moving_left.c      \
+						mandatory/moving_right.c      \
+						mandatory/exit_sprites.c       \
+						mandatory/fire_sprites.c        \
 						mandatory/idle_sprites.c
 
 SRCS_BONUS			=	bonus/so_long_bonus.c  \
@@ -50,6 +51,7 @@ MYAR		=	MYLIB/libar.a
 MLX			=	mlx
 
 FLAGS		=	cc -Wall -Wextra -Werror
+SHORT		=	-L$(MYLB) -lar -lmlx -framework OpenGL -framework AppKit
 RM			=	rm -fr
 
 GREEN		=	"\033[1;32m"
@@ -74,21 +76,21 @@ $(MYLB):
 	@make -C $(MYLB) --no-print-directory
 
 $(NAME): $(OBJS)
-	@$(FLAGS) $^ -L$(MYLB) -lar -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	@$(FLAGS) $^ $(SHORT) -o $(NAME)
 
 $(OBJS): %.o: %.c $(HEADER) $(MYAR) $(MXAR)
 	@$(FLAGS) -c -I $(MYLB) -I $(MLX) $< -o $@
 	@printf $(GREEN)"."$(RESET)
 
-bonus:  start $(MYLB) $(NAME_BONUS) finish
+bonus: start $(MYLB) $(NAME_BONUS) finish
 
 $(NAME_BONUS): $(OBJS_BONUS)
-	@$(FLAGS) $^ -L$(MYLB) -lar -lmlx -framework OpenGL -framework AppKit -o $(NAME_BONUS)
+	@$(FLAGS) $^ $(SHORT) -o $(NAME_BONUS)
 
 $(OBJS_BONUS): %.o: %.c $(HEADER_BONUS) $(MYAR) $(MXAR)
 	@$(FLAGS) -c -I $(MYLB) -I $(MLX) $< -o $@
 	@printf $(GREEN)"."$(RESET)
- 
+
 clean:
 	@$(RM) $(OBJS)
 	@$(RM) $(OBJS_BONUS)

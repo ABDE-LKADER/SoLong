@@ -6,13 +6,13 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/11 16:53:40 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/14 16:49:28 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	mlx_message_error(int set)
+void	mlx_message_error(int set, char *path)
 {
 	if (set == 0)
 		ft_putstr_fd(RED"Error:\n"YLW"Usage: "
@@ -21,9 +21,15 @@ void	mlx_message_error(int set)
 		ft_putstr_fd(RED"Error:\n"RST"Input must have "
 			YLW"\".ber\""RST" extension.\n", 2);
 	else if (set == 2)
-		ft_putstr_fd(RED"Error:\n"YLW"<file>"RST" not found.\n", 2);
+		ft_putstr_fd(RED"Error:\n"YLW"<file>"RST" <-not found->\n", 2);
 	else if (set == 3)
 		ft_putstr_fd(RED"Error:\n"RST"Invalid "YLW"<Map>"RST"\n", 2);
+	else if (set == 4)
+	{
+		ft_putstr_fd(RED"Error:\n"RST"Failed Load IMG "YLW"<", 2);
+		ft_putstr_fd(path, 2);
+		ft_putstr_fd(">"RST"\n", 2);
+	}
 	exit(EXIT_FAILURE);
 }
 
@@ -89,10 +95,10 @@ static void	mlx_map_resolution(t_data *data, t_map *map, int fd)
 
 	line = get_next_line(fd);
 	if (!line)
-		mlx_message_error(3);
+		mlx_message_error(3, NULL);
 	map->len = ft_strlen(line);
 	(ft_strchr(line, '\n')) && (map->len--);
-	(1) && (one = 0, map->width = map->len);
+	(TRUE) && (one = 0, map->width = map->len);
 	while (line)
 	{
 		(one) && (line = next);
@@ -100,12 +106,12 @@ static void	mlx_map_resolution(t_data *data, t_map *map, int fd)
 		if ((!line && map->height <= 2) || map->unwanted)
 		{
 			free(line);
-			mlx_message_error(3);
+			mlx_message_error(3, NULL);
 		}
-		(1) && (mlx_check_map(data, map, line, next), free(line), one = 1);
+		(TRUE) && (mlx_check_map(data, map, line, next), free(line), one = 1);
 	}
 	if (mlx_check_map(data, map, NULL, NULL))
-		mlx_message_error(3);
+		mlx_message_error(3, NULL);
 }
 
 void	mlx_parce_input(int ac, char **av, t_data *data)
@@ -115,22 +121,22 @@ void	mlx_parce_input(int ac, char **av, t_data *data)
 
 	init_data(data);
 	if (ac != 2)
-		mlx_message_error(0);
+		mlx_message_error(0, NULL);
 	extn = ft_strrchr(av[1], '.');
-	if (!extn || ft_strncmp(extn, ".ber", ft_strlen(extn)))
-		mlx_message_error(1);
+	if (!extn || ft_strncmp(extn, EXTN, ft_strlen(EXTN)))
+		mlx_message_error(1, NULL);
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
-		mlx_message_error(2);
+		mlx_message_error(2, NULL);
 	mlx_map_resolution(data, &data->map, fd);
 	close(fd);
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
-		mlx_message_error(2);
+		mlx_message_error(2, NULL);
 	mlx_map_init(data, &data->map, fd);
 	close(fd);
 	flood_fill(data->map.flood, data->pos_x, data->pos_y);
 	if (checker_set(data->map.flood, 'C')
 		|| checker_set(data->map.flood, 'E'))
-		mlx_message_error(3);
+		(cleanup(&data->leak), mlx_message_error(3, NULL));
 }

@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/12 17:41:37 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/14 18:55:26 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	mlx_put_img(t_data *data, char *path, int x, int y)
 
 	img = mlx_xpm_file_to_image(data->mlx, path, &data->height, &data->width);
 	if (!img)
-		(cleaning(&data->leak, data), exit(EXIT_FAILURE));
+		(cleaning(&data->leak, data), mlx_message_error(4, path));
 	mlx_put_image_to_window(data->mlx, data->win, img, x, y);
 	mlx_destroy_image(data->mlx, img);
 }
@@ -39,7 +39,7 @@ static int	mlx_do_effects(void *param)
 	return (count++);
 }
 
-int	mlx_move_player(int key, void *param)
+static int	mlx_move_player(int key, void *param)
 {
 	t_map	*map;
 	t_data	*data;
@@ -73,6 +73,7 @@ static void	mlx_game_render(t_data *data)
 	int		py;
 
 	y = -1;
+	mlx_checker(data);
 	while (data->map.map[++y])
 	{
 		x = -1;

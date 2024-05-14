@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:13:26 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/12 18:03:45 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/14 16:46:07 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ static void	moving_up(t_data *data, int set, int x, int y)
 
 	(set == 1) && (path = JUMP1);
 	(set == 2) && (path = JUMP2);
+	if (data->map.map[data->pos_y - 1][data->pos_x] == 'C')
+		mlx_put_img(data, GROUND, x, (data->pos_y - 1) * DM);
 	img = mlx_xpm_file_to_image(data->mlx, path, &data->height, &data->width);
 	if (!img)
-		(cleaning(&data->leak, data), exit(EXIT_FAILURE));
+		(cleaning(&data->leak, data), mlx_message_error(4, path));
 	mlx_put_image_to_window(data->mlx, data->win, img, x, y);
 	mlx_do_sync(data->mlx);
 	mlx_destroy_image(data->mlx, img);
@@ -44,7 +46,7 @@ void	mlx_move_up(t_data *data, int key)
 		mlx_do_sync(data->mlx);
 		if (move == 49)
 			mlx_sync_frame(data, key);
-		mlx_put_img(data, GROUND, px, py);
 		move += 7;
 	}
+	mlx_put_img(data, GROUND, px, py);
 }
