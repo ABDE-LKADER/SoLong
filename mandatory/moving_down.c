@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 15:13:26 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/14 16:45:58 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/15 11:46:55 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 // 		if (data->map.map[data->pos_y][data->pos_x] == 'C')
 // 			data->map.collect--;
 // 		(move == 49) && (data->map.map[data->pos_y][data->pos_x] = 'P');
-// 		(move == 49) && (ft_printf(GRN"moves: %d\n"RST, data->steps++));
+// 		(move == 49) && (ft_printf(GRN"moves: %d\n"RST, ++data->steps));
 // 		if (move == 49)
 // 			mlx_draw_string(data);
 // 		move += 7;

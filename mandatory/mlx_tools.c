@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 10:46:19 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/14 18:24:01 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/15 11:48:52 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	flood_fill(char **map, int pos_x, int pos_y)
 
 void	mlx_sync_frame(t_data *data, int key)
 {
+	++data->steps;
 	if (key == KEY_UP)
 		--data->pos_y;
 	if (key == KEY_DOWN)
@@ -42,7 +43,7 @@ void	mlx_sync_frame(t_data *data, int key)
 	if (data->map.map[data->pos_y][data->pos_x] == 'C')
 		data->map.collect--;
 	data->map.map[data->pos_y][data->pos_x] = 'P';
-	ft_printf(GRN"moves: %d\n"RST, data->steps++);
+	ft_printf(GRN"moves: %d\n"RST, data->steps);
 }
 
 int	checker_set(char **map, char set)
