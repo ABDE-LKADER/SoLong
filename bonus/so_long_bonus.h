@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/15 11:52:22 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/15 12:04:34 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,12 +216,12 @@ int		mlx_destroy_notify(t_data *data);
 int		checker_set(char **map, char set);
 void	cleaning(t_allocate **leak, t_data *data);
 void	flood_fill(char **map, int pos_x, int pos_y);
-void	mlx_enemy_attack(t_data *data, t_map *map, int count);
 
 ///////////////// EFFECTTS PROTOTYPES /////////////////
 
 void	mlx_idle_effects(t_data *data, int count);
 void	mlx_exit_effects(t_data *data, int count);
 void	mlx_fire_effects(t_data *data, t_map *map, int count);
+void	mlx_enemy_attack(t_data *data, t_map *map, int count);
 
 #endif

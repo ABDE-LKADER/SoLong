@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/24 15:54:07 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/14 22:41:38 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/15 12:05:38 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	mlx_fire_effects(t_data *data, t_map *map, int count)
 	int			y;
 	static int	set;
 
-	if (!(count % 899) && ++set <= 8)
+	if (!(count % 999) && ++set <= 8)
 	{
 		y = -1;
 		while (map->map[++y])

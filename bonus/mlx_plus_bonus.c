@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 15:37:35 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/15 11:47:19 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/15 13:43:00 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,14 @@ void	exit_game(t_data *data, int key)
 {
 	if (key != KEY_ESCAPE)
 		ft_printf(GRN"moves: %d\n"RST, ++data->steps);
+	if ((ft_strchr("N", data->map.up) && key == KEY_UP)
+		|| (ft_strchr("N", data->map.down) && key == KEY_DOWN)
+		|| (ft_strchr("N", data->map.left) && key == KEY_LEFT)
+		|| (ft_strchr("N", data->map.right) && key == KEY_RIGHT)
+		|| key == FALSE)
+		ft_printf(RED"<- GAME OVER ->\n"RST);
+	else if (key != KEY_ESCAPE)
+		ft_printf(YLW"<- WINNER ->\n"RST);
 	cleaning(&data->leak, data);
 	exit(EXIT_SUCCESS);
 }
