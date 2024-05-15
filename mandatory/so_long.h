@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/14 18:55:07 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/15 09:50:45 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define SO_LONG_H
 
 # include "mylib.h"
-# include <stdio.h>
-# include <string.h>
 # include <fcntl.h>
 # include <mlx.h>
 
