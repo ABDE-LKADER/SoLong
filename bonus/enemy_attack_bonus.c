@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 10:46:19 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/15 21:58:14 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/17 12:09:26 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,9 @@ static void	mlx_put_attack(t_data *data, int set, int x, int y)
 static void	mlx_enemy_handler(t_data *data, int set, int x, int y)
 {
 	mlx_put_img(data, GROUND, x * DM, y * DM);
-	if (x < data->pos_x && !ft_strchr("1CEN", data->map.map[y][x + 1]))
-	{
-		data->map.map[y][x++] = '0';
-		data->map.map[y][x] = 'N';
-	}
-	else if (x > data->pos_x && !ft_strchr("1CEN", data->map.map[y][x - 1]))
+	if (x > data->pos_x && !ft_strchr("1CEN", data->map.map[y][x - 1]))
 	{
 		data->map.map[y][x--] = '0';
-		data->map.map[y][x] = 'N';
-	}
-	else if (y < data->pos_y && !ft_strchr("1CEN", data->map.map[y + 1][x]))
-	{
-		data->map.map[y++][x] = '0';
 		data->map.map[y][x] = 'N';
 	}
 	else if (y > data->pos_y && !ft_strchr("1CEN", data->map.map[y - 1][x]))
@@ -59,19 +49,63 @@ static void	mlx_enemy_handler(t_data *data, int set, int x, int y)
 	mlx_put_attack(data, set, x * DM, y * DM);
 }
 
+static void	mlx_enemy_handler_plus(t_data *data, int set, int x, int y)
+{
+	mlx_put_img(data, GROUND, x * DM, y * DM);
+	if (x < data->pos_x && !ft_strchr("1CEN", data->map.map[y][x + 1]))
+	{
+		data->map.map[y][x++] = '0';
+		data->map.map[y][x] = 'N';
+	}
+	else if (y < data->pos_y && !ft_strchr("1CEN", data->map.map[y + 1][x]))
+	{
+		data->map.map[y++][x] = '0';
+		data->map.map[y][x] = 'N';
+	}
+	if (x == data->pos_x && y == data->pos_y)
+		exit_game(data, FALSE);
+	mlx_put_img(data, GROUND, x * DM, y * DM);
+	mlx_put_attack(data, set, x * DM, y * DM);
+}
+
+static void	mlx_enemy_attack_plus(t_data *data, t_map *map)
+{
+	static int	y;
+	static int	x;
+	static int	set;
+
+	if (y == map->height)
+		y = 0;
+	while (map->map[y])
+	{
+		if (x == map->width)
+			x = -1;
+		while (map->map[y][++x])
+		{
+			if (map->map[y][x] == 'N')
+			{
+				mlx_enemy_handler_plus(data, set, x, y);
+				return ;
+			}
+		}
+		if (x == map->width)
+			y++;
+	}
+}
+
 void	mlx_enemy_attack(t_data *data, t_map *map, int count)
 {
-	int	x;
-	static int	y  = -1;
+	static int	y;
 	static int	set;
+	static int	x = -1;
 
 	if (!(count % 999) && ++set <= 6)
 	{
-		if (y == map->height)
-			y = -1;
-		while (map->map[++y])
+		(y == map->height) && (y = 0);
+		while (map->map[y])
 		{
-			x = -1;
+			if (x == map->width)
+				x = -1;
 			while (map->map[y][++x])
 			{
 				if (map->map[y][x] == 'N')
@@ -80,7 +114,10 @@ void	mlx_enemy_attack(t_data *data, t_map *map, int count)
 					return ;
 				}
 			}
+			(x == map->width) && (y++);
 		}
 	}
+	else if (!(count % 1299))
+		mlx_enemy_attack_plus(data, map);
 	(set == 6) && (set = 0);
 }

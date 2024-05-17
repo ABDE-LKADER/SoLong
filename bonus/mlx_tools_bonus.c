@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 10:46:19 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/15 11:49:51 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/17 10:26:55 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	flood_fill(char **map, int pos_x, int pos_y)
 
 void	mlx_sync_frame(t_data *data, int key)
 {
+	data->map.map[data->pos_y][data->pos_x] = '0';
 	++data->steps;
 	if (key == KEY_UP)
 		--data->pos_y;
