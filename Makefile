@@ -6,7 +6,7 @@
 #    By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/19 17:23:22 by abadouab          #+#    #+#              #
-#    Updated: 2024/05/14 23:10:09 by abadouab         ###   ########.fr        #
+#    Updated: 2024/05/22 10:37:43 by abadouab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,12 +19,11 @@ SRCS				=	mandatory/so_long.c  \
 						mandatory/mlx_tools.c   \
 						mandatory/mlx_space.c    \
 						mandatory/moving_up.c     \
-						mandatory/mlx_checker.c    \
-						mandatory/moving_down.c     \
-						mandatory/moving_left.c      \
-						mandatory/moving_right.c      \
-						mandatory/exit_sprites.c       \
-						mandatory/fire_sprites.c        \
+						mandatory/moving_down.c    \
+						mandatory/moving_left.c     \
+						mandatory/moving_right.c     \
+						mandatory/exit_sprites.c      \
+						mandatory/fire_sprites.c       \
 						mandatory/idle_sprites.c
 
 SRCS_BONUS			=	bonus/so_long_bonus.c  \
