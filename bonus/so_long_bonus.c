@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/22 18:20:46 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/22 19:13:49 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,11 @@ static void	mlx_game_render(t_data *data)
 		}
 	}
 }
-void fn(){system("leaks so_long_bonus");}
+
 int	main(int ac, char **av)
 {
 	t_data	data;
 
-	atexit(fn);
 	mlx_parce_input(ac, av, &data);
 	data.mlx = mlx_init();
 	if (!data.mlx)
