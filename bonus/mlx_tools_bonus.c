@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 10:46:19 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/22 10:46:10 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/22 18:36:03 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,9 @@ void	mlx_draw_string(t_data *data)
 	steps = ft_itoa(data->steps);
 	mlx_put_img(data, WALL2, DM * 2, 0);
 	mlx_put_img(data, WALL2, DM * 3, 0);
-	mlx_put_img(data, WALL2, DM * 4, 0);
+	if (data->map.width - 1 != 4)
+		mlx_put_img(data, WALL2, DM * 4, 0);
+	if (data->map.width - 1 != 5)
 	mlx_put_img(data, WALL2, DM * 5, 0);
 	mlx_string_put(data->mlx, data->win, 152, 6, 0x7A7A7A, "STEPS: ");
 	mlx_string_put(data->mlx, data->win, 215, 6, 0x7A7A7A, steps);
