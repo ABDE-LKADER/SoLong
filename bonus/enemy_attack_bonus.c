@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 10:46:19 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/17 12:09:26 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:15:11 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,12 @@ static void	mlx_enemy_handler_plus(t_data *data, int set, int x, int y)
 	mlx_put_attack(data, set, x * DM, y * DM);
 }
 
-static void	mlx_enemy_attack_plus(t_data *data, t_map *map)
+static void	mlx_enemy_attack_plus(t_data *data, t_map *map, int set)
 {
 	static int	y;
 	static int	x;
-	static int	set;
 
-	if (y == map->height)
-		y = 0;
+	(y == map->height) && (y = 0);
 	while (map->map[y])
 	{
 		if (x == map->width)
@@ -88,8 +86,7 @@ static void	mlx_enemy_attack_plus(t_data *data, t_map *map)
 				return ;
 			}
 		}
-		if (x == map->width)
-			y++;
+		(x == map->width) && (y++);
 	}
 }
 
@@ -99,7 +96,7 @@ void	mlx_enemy_attack(t_data *data, t_map *map, int count)
 	static int	set;
 	static int	x = -1;
 
-	if (!(count % 999) && ++set <= 6)
+	if (++set <= 6 && !(count % 799))
 	{
 		(y == map->height) && (y = 0);
 		while (map->map[y])
@@ -117,7 +114,7 @@ void	mlx_enemy_attack(t_data *data, t_map *map, int count)
 			(x == map->width) && (y++);
 		}
 	}
-	else if (!(count % 1299))
-		mlx_enemy_attack_plus(data, map);
+	else if (!(count % 1299) && set <= 6)
+		mlx_enemy_attack_plus(data, map, set);
 	(set == 6) && (set = 0);
 }
