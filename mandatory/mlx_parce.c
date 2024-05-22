@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/14 16:49:28 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/22 10:29:14 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,31 @@ void	mlx_message_error(int set, char *path)
 		ft_putstr_fd(">"RST"\n", 2);
 	}
 	exit(EXIT_FAILURE);
+}
+
+static void	mlx_map_init(t_data *data, t_map *map, int fd)
+{
+	int			len;
+	int			index;
+	char		*line;
+
+	index = 0;
+	len = map->width + 1;
+	line = get_next_line(fd);
+	map->map = allocate(&data->leak, (map->height + 1), sizeof(char **));
+	map->flood = allocate(&data->leak, (map->height + 1), sizeof(char **));
+	while (line)
+	{
+		map->map[index] = allocate(&data->leak, len, sizeof(char *));
+		map->flood[index] = allocate(&data->leak, len, sizeof(char *));
+		ft_strlcpy(map->map[index], line, len);
+		ft_strlcpy(map->flood[index], line, len);
+		free(line);
+		line = get_next_line(fd);
+		index++;
+	}
+	map->map[index] = NULL;
+	map->flood[index] = NULL;
 }
 
 static int	mlx_check_map(t_data *data, t_map *map, char *line, char *next)
@@ -60,31 +85,6 @@ static int	mlx_check_map(t_data *data, t_map *map, char *line, char *next)
 	(map->exit != 1) && (invalid = 1);
 	(map->player != 1) && (invalid = 1);
 	return (invalid);
-}
-
-static void	mlx_map_init(t_data *data, t_map *map, int fd)
-{
-	int			len;
-	int			index;
-	char		*line;
-
-	index = 0;
-	len = map->width + 1;
-	line = get_next_line(fd);
-	map->map = allocate(&data->leak, (map->height + 1), sizeof(char **));
-	map->flood = allocate(&data->leak, (map->height + 1), sizeof(char **));
-	while (line)
-	{
-		map->map[index] = allocate(&data->leak, len, sizeof(char *));
-		map->flood[index] = allocate(&data->leak, len, sizeof(char *));
-		ft_strlcpy(map->map[index], line, len);
-		ft_strlcpy(map->flood[index], line, len);
-		free(line);
-		line = get_next_line(fd);
-		index++;
-	}
-	map->map[index] = NULL;
-	map->flood[index] = NULL;
 }
 
 static void	mlx_map_resolution(t_data *data, t_map *map, int fd)
