@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/22 10:47:01 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/22 17:16:49 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,19 @@
 
 # include "mylib.h"
 # include <fcntl.h>
+# include <stdio.h>
 # include <mlx.h>
 
 ///////////////// SO_LONG STRUCTS /////////////////
+
+///////////////// STRUCTS POS /////////////////
+
+typedef struct s_pos
+{
+	int				ex;
+	int				ey;
+	struct s_pos	*next;
+}					t_pos;
 
 ///////////////// STRUCTS MAP /////////////////
 
@@ -53,6 +63,7 @@ typedef struct s_data
 	int				pos_y;
 	int				exit_x;
 	int				exit_y;
+	t_pos			*pos;
 	t_allocate		*leak;
 }					t_data;
 
@@ -214,6 +225,7 @@ void	exit_game(t_data *data, int key);
 int		mlx_destroy_notify(t_data *data);
 int		checker_set(char **map, char set);
 void	cleaning(t_allocate **leak, t_data *data);
+void	mlx_enemy_positions(t_data *data, t_pos **pos);
 void	flood_fill(char **map, int pos_x, int pos_y);
 
 ///////////////// EFFECTTS PROTOTYPES /////////////////
@@ -221,6 +233,6 @@ void	flood_fill(char **map, int pos_x, int pos_y);
 void	mlx_idle_effects(t_data *data, int count);
 void	mlx_exit_effects(t_data *data, int count);
 void	mlx_fire_effects(t_data *data, t_map *map, int count);
-void	mlx_enemy_attack(t_data *data, t_map *map, int count);
+void	mlx_enemy_attack(t_data *data, t_pos *pos, int count);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/15 12:27:56 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/22 17:08:41 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	mlx_do_effects(void *param)
 	mlx_idle_effects(data, count);
 	mlx_exit_effects(data, count);
 	mlx_fire_effects(data, map, count);
-	mlx_enemy_attack(data, map, count);
+	mlx_enemy_attack(data, data->pos, count);
 	// if (!ft_strchr("1E", map->map[data->pos_y + 1][data->pos_x])
 	// 	&& count % 100 == 0)
 	// 	mlx_move_down(data);

@@ -6,80 +6,108 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 10:46:19 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/22 15:33:07 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/22 17:18:48 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-static void	mlx_put_attack(t_data *data, int set, int x, int y)
+static void	mlx_get_positin(t_data *data, t_pos **pos, int x, int y)
+{
+	t_pos	*new;
+
+	new = allocate(&data->leak, TRUE, sizeof(t_pos));
+	if (!pos || !new)
+		(cleaning(&data->leak, data), mlx_message_error(5, NULL));
+	new->ex = x;
+	new->ey = y;
+	new->next = NULL;
+	new->next = (*pos);
+	(*pos) = new;
+}
+
+void	mlx_enemy_positions(t_data *data, t_pos **pos)
+{
+	int		ex;
+	int		ey;
+	char	**map;
+
+	(TRUE) && (ey = -1, map = data->map.map);
+	while (map[++ey])
+	{
+		ex = -1;
+		while (map[ey][++ex])
+		{
+			if (map[ey][ex] == 'N')
+				mlx_get_positin(data, pos, ex, ey);
+		}
+	}
+}
+
+static void	mlx_put_attack(t_data *data, t_pos *pos, int set, int dir)
 {
 	void	*img;
 	char	*path;
 
-	(set == 1) && (path = ENEMY1);
-	(set == 2) && (path = ENEMY2);
-	(set == 3) && (path = ENEMY3);
-	(set == 4) && (path = ENEMY4);
-	(set == 5) && (path = ENEMY5);
-	(set == 6) && (path = ENEMY6);
+	(!dir && set == 1) && (path = BACK1);
+	(!dir && set == 2) && (path = BACK2);
+	(!dir && set == 3) && (path = BACK3);
+	(!dir && set == 4) && (path = BACK4);
+	(!dir && set == 5) && (path = BACK5);
+	(!dir && set == 6) && (path = BACK6);
+	(dir && set == 1) && (path = ENEMY1);
+	(dir && set == 2) && (path = ENEMY2);
+	(dir && set == 3) && (path = ENEMY3);
+	(dir && set == 4) && (path = ENEMY4);
+	(dir && set == 5) && (path = ENEMY5);
+	(dir && set == 6) && (path = ENEMY6);
 	img = mlx_xpm_file_to_image(data->mlx, path, &data->height, &data->width);
 	if (!img)
 		(cleaning(&data->leak, data), mlx_message_error(4, path));
-	mlx_put_image_to_window(data->mlx, data->win, img, x, y);
+	mlx_put_image_to_window(data->mlx,
+		data->win, img, pos->ex * DM, pos->ey * DM);
 	mlx_destroy_image(data->mlx, img);
 }
 
-static void	mlx_enemy_handler(t_data *data, int set, int x, int y)
+static void	mlx_enemy_handler(t_data *data, t_pos *pos, int set)
 {
-	mlx_put_img(data, GROUND, x * DM, y * DM);
-	if (x > data->pos_x && !ft_strchr("1CEN", data->map.map[y][x - 1]))
-	{
-		data->map.map[y][x--] = '0';
-		data->map.map[y][x] = 'N';
-	}
-	else if (y > data->pos_y && !ft_strchr("1CEN", data->map.map[y - 1][x]))
-	{
-		data->map.map[y--][x] = '0';
-		data->map.map[y][x] = 'N';
-	}
-	else if (x < data->pos_x && !ft_strchr("1CEN", data->map.map[y][x + 1]))
-	{
-		data->map.map[y][x++] = '0';
-		data->map.map[y][x] = 'N';
-	}
-	else if (y < data->pos_y && !ft_strchr("1CEN", data->map.map[y + 1][x]))
-	{
-		data->map.map[y++][x] = '0';
-		data->map.map[y][x] = 'N';
-	}
-	if (x == data->pos_x && y == data->pos_y)
+	static int		dir;
+
+	mlx_put_img(data, GROUND, pos->ex * DM, pos->ey * DM);
+	if (pos->ex > data->pos_x
+		&& !ft_strchr("1CEN", data->map.map[pos->ey][pos->ex - 1]))
+		(TRUE) && (data->map.map[pos->ey][pos->ex--] = '0',
+			data->map.map[pos->ey][pos->ex] = 'N', dir = 1);
+	else if (pos->ey > data->pos_y
+		&& !ft_strchr("1CEN", data->map.map[pos->ey - 1][pos->ex]))
+		(TRUE) && (data->map.map[pos->ey--][pos->ex] = '0',
+			data->map.map[pos->ey][pos->ex] = 'N');
+	else if (pos->ex < data->pos_x
+		&& !ft_strchr("1CEN", data->map.map[pos->ey][pos->ex + 1]))
+		(TRUE) && (data->map.map[pos->ey][pos->ex++] = '0',
+			data->map.map[pos->ey][pos->ex] = 'N', dir = 0);
+	else if (pos->ey < data->pos_y
+		&& !ft_strchr("1CEN", data->map.map[pos->ey + 1][pos->ex]))
+		(TRUE) && (data->map.map[pos->ey++][pos->ex] = '0',
+			data->map.map[pos->ey][pos->ex] = 'N');
+	if (pos->ex == data->pos_x && pos->ey == data->pos_y)
 		exit_game(data, FALSE);
-	mlx_put_img(data, GROUND, x * DM, y * DM);
-	mlx_put_attack(data, set, x * DM, y * DM);
+	mlx_put_img(data, GROUND, pos->ex * DM, pos->ey * DM);
+	mlx_put_attack(data, pos, set, dir);
 }
 
-void	mlx_enemy_attack(t_data *data, t_map *map, int count)
+void	mlx_enemy_attack(t_data *data, t_pos *pos, int count)
 {
-	static int	y;
+	t_pos		*loop;
 	static int	set;
-	static int	x = -1;
 
-	if (++set <= 6 && !(count % 999))
+	if (++set <= 6 && !(count % 2919))
 	{
-		(y == map->height) && (y = 0);
-		while (map->map[y])
+		loop = pos;
+		while (loop)
 		{
-			(x == map->width) && (x = -1);
-			while (map->map[y][++x])
-			{
-				if (map->map[y][x] == 'N')
-				{
-					mlx_enemy_handler(data, set, x, y);
-					return ;
-				}
-			}
-			(x == map->width) && (y++);
+			mlx_enemy_handler(data, loop, set);
+			loop = loop->next;
 		}
 	}
 	(set == 6) && (set = 0);

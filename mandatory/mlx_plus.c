@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 15:37:35 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/22 10:37:23 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/22 15:52:25 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 void	exit_game(t_data *data, int key)
 {
 	if (key != KEY_ESCAPE)
+	{
 		ft_printf(GRN"moves: %d\n"RST, ++data->steps);
+		ft_printf(YLW"<- SO__LO__NG ->\n"RST);
+	}
 	cleaning(&data->leak, data);
 	exit(EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/22 12:02:09 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/22 17:05:53 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	mlx_message_error(int set, char *path)
 		ft_putstr_fd(path, 2);
 		ft_putstr_fd(">"RST"\n", 2);
 	}
+	else if (set == 5)
+		perror(RED"Error"RST);
 	exit(EXIT_FAILURE);
 }
 
@@ -139,4 +141,5 @@ void	mlx_parce_input(int ac, char **av, t_data *data)
 	if (checker_set(data->map.flood, 'C')
 		|| checker_set(data->map.flood, 'E'))
 		(cleanup(&data->leak), mlx_message_error(3, NULL));
+	mlx_enemy_positions(data, &data->pos);
 }
