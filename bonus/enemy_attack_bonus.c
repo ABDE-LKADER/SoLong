@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 10:46:19 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/22 12:16:09 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/22 12:57:16 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,8 +120,8 @@ void	mlx_enemy_attack(t_data *data, t_map *map, int count)
 				(x == map->width) && (y++);
 			}
 		}
-		else if (x < data->pos_x || y < data->pos_y)
-			mlx_enemy_attack_plus(data, map, set);
 	}
+	else if (x < data->pos_x || y < data->pos_y)
+		mlx_enemy_attack_plus(data, map, set);
 	(set == 6) && (set = 0);
 }
