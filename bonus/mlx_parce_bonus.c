@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/14 22:55:40 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/22 12:02:09 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ void	mlx_parce_input(int ac, char **av, t_data *data)
 	int		fd;
 	char	*extn;
 
-	init_data(data);
 	if (ac != 2)
 		mlx_message_error(0, NULL);
 	extn = ft_strrchr(av[1], '.');
@@ -128,6 +127,7 @@ void	mlx_parce_input(int ac, char **av, t_data *data)
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		mlx_message_error(2, NULL);
+	ft_bzero(data, sizeof(t_data));
 	mlx_map_resolution(data, &data->map, fd);
 	close(fd);
 	fd = open(av[1], O_RDONLY);

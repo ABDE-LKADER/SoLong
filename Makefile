@@ -6,7 +6,7 @@
 #    By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/19 17:23:22 by abadouab          #+#    #+#              #
-#    Updated: 2024/05/22 10:37:43 by abadouab         ###   ########.fr        #
+#    Updated: 2024/05/22 10:45:20 by abadouab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,11 +34,10 @@ SRCS_BONUS			=	bonus/so_long_bonus.c  \
 						bonus/moving_up_bonus.c     \
 						bonus/moving_down_bonus.c    \
 						bonus/moving_left_bonus.c     \
-						bonus/mlx_checker_bonus.c      \
-						bonus/moving_right_bonus.c      \
-						bonus/exit_sprites_bonus.c       \
-						bonus/fire_sprites_bonus.c        \
-						bonus/idle_sprites_bonus.c         \
+						bonus/moving_right_bonus.c     \
+						bonus/exit_sprites_bonus.c      \
+						bonus/fire_sprites_bonus.c       \
+						bonus/idle_sprites_bonus.c        \
 						bonus/enemy_attack_bonus.c
 
 OBJS				=	$(SRCS:.c=.o)

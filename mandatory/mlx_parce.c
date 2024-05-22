@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/22 10:40:58 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/22 12:02:17 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void	mlx_parce_input(int ac, char **av, t_data *data)
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		mlx_message_error(2, NULL);
-	ft_memset(data, FALSE, sizeof(t_data));
+	ft_bzero(data, sizeof(t_data));
 	mlx_map_resolution(data, &data->map, fd);
 	close(fd);
 	fd = open(av[1], O_RDONLY);

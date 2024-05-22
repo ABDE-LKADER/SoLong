@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 19:18:37 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/15 09:50:45 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/22 10:42:21 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,6 @@ typedef struct s_data
 
 ///////////////// PROTOTYPES PARCE /////////////////
 
-void	init_data(t_data *data);
 void	mlx_checker(t_data *data);
 void	mlx_message_error(int set, char *path);
 void	mlx_parce_input(int ac, char **av, t_data *data);

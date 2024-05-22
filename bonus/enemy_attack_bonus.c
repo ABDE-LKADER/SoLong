@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 10:46:19 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/21 11:15:11 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/22 12:16:09 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,21 +72,25 @@ static void	mlx_enemy_attack_plus(t_data *data, t_map *map, int set)
 {
 	static int	y;
 	static int	x;
+	static int	one;
 
-	(y == map->height) && (y = 0);
-	while (map->map[y])
+	(!one) && (x = map->width - 1, y = map->height - 1, one = 1);
+	(y == -1) && (y = map->height - 1);
+	while (y >= 0)
 	{
-		if (x == map->width)
-			x = -1;
-		while (map->map[y][++x])
+		ft_printf("Y -----_> %d\n", y);
+		(x == -1) && (x = map->width - 1);
+		while (x >= 0)
 		{
+			ft_printf("X -----_> %d\n", x);
 			if (map->map[y][x] == 'N')
 			{
 				mlx_enemy_handler_plus(data, set, x, y);
 				return ;
 			}
+			x--;
 		}
-		(x == map->width) && (y++);
+		(x == -1) && (y--);
 	}
 }
 
@@ -96,25 +100,28 @@ void	mlx_enemy_attack(t_data *data, t_map *map, int count)
 	static int	set;
 	static int	x = -1;
 
-	if (++set <= 6 && !(count % 799))
+	if (++set <= 6 && !(count % 999))
 	{
-		(y == map->height) && (y = 0);
-		while (map->map[y])
+		if (x > data->pos_x || y > data->pos_y)
 		{
-			if (x == map->width)
-				x = -1;
-			while (map->map[y][++x])
+			(y == map->height) && (y = 0);
+			while (map->map[y])
 			{
-				if (map->map[y][x] == 'N')
+				if (x == map->width)
+					x = -1;
+				while (map->map[y][++x])
 				{
-					mlx_enemy_handler(data, set, x, y);
-					return ;
+					if (map->map[y][x] == 'N')
+					{
+						mlx_enemy_handler(data, set, x, y);
+						return ;
+					}
 				}
+				(x == map->width) && (y++);
 			}
-			(x == map->width) && (y++);
 		}
+		else if (x < data->pos_x || y < data->pos_y)
+			mlx_enemy_attack_plus(data, map, set);
 	}
-	else if (!(count % 1299) && set <= 6)
-		mlx_enemy_attack_plus(data, map, set);
 	(set == 6) && (set = 0);
 }
