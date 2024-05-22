@@ -6,7 +6,7 @@
 /*   By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 15:37:35 by abadouab          #+#    #+#             */
-/*   Updated: 2024/05/22 16:40:43 by abadouab         ###   ########.fr       */
+/*   Updated: 2024/05/22 17:39:51 by abadouab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	exit_game(t_data *data, int key)
 {
-	if (key != KEY_ESCAPE)
+	if (key != KEY_ESCAPE && key != FALSE)
 		ft_printf(GRN"moves: %d\n"RST, ++data->steps);
 	if ((ft_strchr("N", data->map.up) && key == KEY_UP)
 		|| (ft_strchr("N", data->map.down) && key == KEY_DOWN)
