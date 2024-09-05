@@ -48,16 +48,25 @@ HEADER_BONUS		=	bonus/so_long_bonus.h
 
 MYLB		=	MYLIB
 MYAR		=	MYLIB/libar.a
-MLX			=	mlx
 
-FLAGS		=	cc -Wall -Wextra -Werror
-SHORT		=	-L$(MYLB) -lar -lmlx -framework OpenGL -framework AppKit
+FLAGS		=	cc -Wall -Wextra # -Werror
+SHORT		=	-L$(MYLB) -lar
 RM			=	rm -fr
 
 GREEN		=	"\033[1;32m"
 YELOW 		=	"\033[1;33m"
 REDCL 		=	"\033[1;31m"
 RESET 		=	"\033[0m"
+
+OS := $(shell uname)
+
+ifeq ($(OS), Darwin)
+	SHORT	+=	-lmlx -framework OpenGL -framework AppKit
+	MLX		=	mlx
+else
+    SHORT	+=	-Lmlx_linux -lmlx_Linux -lXext -lX11
+	MLX		=	mlx_linux
+endif
 
 all: start $(MYLB) $(NAME) finish
 
@@ -73,6 +82,7 @@ finish:
 	@printf "\n"
 
 $(MYLB):
+	@make -C $(MLX) --no-print-directory
 	@make -C $(MYLB) --no-print-directory
 
 $(NAME): $(OBJS)
@@ -100,6 +110,7 @@ clean:
 fclean: clean
 	@$(RM) $(NAME)
 	@$(RM) $(NAME_BONUS)
+	@make clean -C $(MLX) --no-print-directory
 	@make fclean -C $(MYLB) --no-print-directory
 	@echo $(REDCL)Purging all files 🗑️$(RESET)
 
