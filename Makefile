@@ -64,8 +64,8 @@ ifeq ($(OS), Darwin)
 	SHORT	+=	-lmlx -framework OpenGL -framework AppKit
 	MLX		=	mlx
 else
-    SHORT	+=	-Lmlx_linux -lmlx_Linux -lXext -lX11
-	MLX		=	mlx_linux
+    SHORT	+=	-Lminilibx-linux -lmlx_Linux -lXext -lX11
+	MLX		=	minilibx-linux
 endif
 
 all: start $(MYLB) $(NAME) finish
