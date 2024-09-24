@@ -6,7 +6,7 @@
 #    By: abadouab <abadouab@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/19 17:23:22 by abadouab          #+#    #+#              #
-#    Updated: 2024/05/22 10:45:20 by abadouab         ###   ########.fr        #
+#    Updated: 2024/09/24 18:45:21 by abadouab         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,8 +82,8 @@ finish:
 	@printf "\n"
 
 $(MYLB):
-	@make -C $(MLX) --no-print-directory
-	@make -C $(MYLB) --no-print-directory
+	@if [ "$(OS)" = "Linux" ]; then make -sC $(MLX) --no-print-directory; fi
+	@make -sC $(MYLB) --no-print-directory
 
 $(NAME): $(OBJS)
 	@$(FLAGS) $^ $(SHORT) -o $(NAME)
@@ -110,7 +110,7 @@ clean:
 fclean: clean
 	@$(RM) $(NAME)
 	@$(RM) $(NAME_BONUS)
-	@make clean -C $(MLX) --no-print-directory
+	@if [ "$(OS)" = "Linux" ]; then @make clean -C $(MLX) --no-print-directory; fi
 	@make fclean -C $(MYLB) --no-print-directory
 	@echo $(REDCL)Purging all files 🗑️$(RESET)
 
